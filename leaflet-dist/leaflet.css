@@ -1,4 +1,11 @@
 /* additional/changed styles - added by RH */
+.lmm-panel-api-images {
+	background:no-repeat!important;
+	margin:0px!important;
+	padding:0px!important;
+	border:none!important;
+}
+
 .lmm-geo-tags { display:none!important; } 
 .leaflet-container {
   max-width: none;
@@ -15,6 +22,9 @@
 .leaflet-popup-content a {
 	text-decoration:none;
 }
+.leaflet-control-attribution  a {
+	text-decoration:none;
+}
 /*RH add new leaflet.css-code for updated version below - also check end of file on updates! -> img max-width override! */
 /*important: change .leaflet-container img { on updates!
 	background:no-repeat !important;
@@ -22,6 +32,14 @@
 	margin:0px;
 	max-width: none !important;
 	border: none !important;
+	
+.leaflet-container a {
+add	border: none;	
+	
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+add	text-align:left;
+		
 /* leaflet.css - required styles */
 .leaflet-map-pane,
 .leaflet-tile,
@@ -178,6 +196,7 @@ a.leaflet-active {
 .leaflet-control-layers .leaflet-control-layers-list,
 .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
 	display: none;
+	text-align:left;
 	}
 .leaflet-control-layers-expanded .leaflet-control-layers-list {
 	display: block;
@@ -290,6 +309,7 @@ a.leaflet-active {
 	}
 .leaflet-container a {
 	color: #0078A8;
+	border: none;
 	}
 .leaflet-zoom-box {
 	border: 2px dotted #05f;
