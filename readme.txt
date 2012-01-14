@@ -176,6 +176,9 @@ Initial release
 
 == Changelog ==
 
+= v1.3 - xx.01.2012 =
+* BUGFIX: CSS issues on certain templates with links (border), panel API link images & text alignment of text in basemap controlbox
+
 = v1.2.2 - 14.01.2012 =
 * BUGFIX: custom marker icons were not shown on certain hosts due to different wp-upload-directories
 
