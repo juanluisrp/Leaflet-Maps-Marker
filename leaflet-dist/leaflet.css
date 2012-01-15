@@ -1,4 +1,20 @@
 /* additional/changed styles - added by RH */
+.lmm-panel {
+	position:relative;
+	padding:5px;
+	border-right:1px solid #ccc;
+	border-top:1px solid #ccc;
+	border-left:1px solid #ccc;
+}
+
+.lmm-panel-api {
+	width:120px;
+	text-align:right;
+	position:absolute;
+	right:5px;
+	top:5px;
+}
+
 .lmm-panel-api-images {
 	background:no-repeat!important;
 	margin:0px!important;
