@@ -124,6 +124,14 @@ function leafletmapsmarker() {
     $table_name_layers = $wpdb->prefix.'leafletmapsmarker_layers';
     include('leaflet-marker.php');
   }
+  function lmm_tools()
+  {
+    global $wpdb;
+    $lmm_options = get_option( 'leafletmapsmarker_options' );
+    $table_name_markers = $wpdb->prefix.'leafletmapsmarker_markers';
+    $table_name_layers = $wpdb->prefix.'leafletmapsmarker_layers';
+    include('leaflet-tools.php');
+  }
   function lmm_showmap($atts) {
     global $wpdb;
     $lmm_options = get_option( 'leafletmapsmarker_options' );
@@ -564,8 +572,10 @@ function leafletmapsmarker() {
 	$page3 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('add/edit marker', 'lmm'), __('Add new marker', 'lmm'), $lmm_options[ 'capabilities_edit' ], 'leafletmapsmarker_marker', array(&$this, 'lmm_marker') );
 	$page4 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('List all layers', 'lmm'), __('List all layers', 'lmm'), $lmm_options[ 'capabilities_edit' ], 'leafletmapsmarker_layers', array(&$this, 'lmm_list_layers') );
 	$page5 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('add/edit layer', 'lmm'), __('Add new layer', 'lmm'), $lmm_options[ 'capabilities_edit' ], 'leafletmapsmarker_layer', array(&$this, 'lmm_layer') );
-	$page6 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('Help & Credits', 'lmm'), __('Help & Credits', 'lmm'), $lmm_options[ 'capabilities_edit' ], 'leafletmapsmarker_help', array(&$this, 'lmm_help') );
+	$page6 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('Tools', 'lmm'), __('Tools', 'lmm'), 'activate_plugins','leafletmapsmarker_tools', array(&$this, 'lmm_tools') );
 	$page7 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('Settings', 'lmm'), __('Settings', 'lmm'), 'activate_plugins','leafletmapsmarker_settings', array(&$this, 'lmm_settings') );
+	$page8 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('Help & Credits', 'lmm'), __('Help & Credits', 'lmm'), $lmm_options[ 'capabilities_edit' ], 'leafletmapsmarker_help', array(&$this, 'lmm_help') );
+
 	//info: add javascript - leaflet.js - for admin area
 	add_action('admin_print_scripts-'.$page3, array(&$this, 'lmm_admin_enqueue_scripts'),7);
 	add_action('admin_print_scripts-'.$page5, array(&$this, 'lmm_admin_enqueue_scripts'),8);
@@ -578,6 +588,7 @@ function leafletmapsmarker() {
 	add_action('admin_print_scripts-'.$page5, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),14);
 	add_action('admin_print_scripts-'.$page6, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),15);
 	add_action('admin_print_scripts-'.$page7, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),16);
+	add_action('admin_print_scripts-'.$page8, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),16);
 	//info: add css styles for admin area
 	add_action('admin_print_styles-'.$page, array(&$this, 'lmm_admin_enqueue_stylesheets'),17);
 	add_action('admin_print_styles-'.$page2, array(&$this, 'lmm_admin_enqueue_stylesheets'),18);
@@ -586,6 +597,7 @@ function leafletmapsmarker() {
 	add_action('admin_print_styles-'.$page5, array(&$this, 'lmm_admin_enqueue_stylesheets'),21);
 	add_action('admin_print_styles-'.$page6, array(&$this, 'lmm_admin_enqueue_stylesheets'),22);
 	add_action('admin_print_styles-'.$page7, array(&$this, 'lmm_admin_enqueue_stylesheets'),23);
+	add_action('admin_print_styles-'.$page8, array(&$this, 'lmm_admin_enqueue_stylesheets'),23);	
 	//info: add contextual help on all pages
 	add_action('admin_print_scripts-'.$page, array(&$this, 'lmm_add_contextual_help'));
 	add_action('admin_print_scripts-'.$page2, array(&$this, 'lmm_add_contextual_help'));
@@ -594,6 +606,7 @@ function leafletmapsmarker() {
 	add_action('admin_print_scripts-'.$page5, array(&$this, 'lmm_add_contextual_help'));
 	add_action('admin_print_scripts-'.$page6, array(&$this, 'lmm_add_contextual_help'));
 	add_action('admin_print_scripts-'.$page7, array(&$this, 'lmm_add_contextual_help'));
+	add_action('admin_print_scripts-'.$page8, array(&$this, 'lmm_add_contextual_help'));	
   }
   function lmm_add_admin_bar_menu() {
 	global $wp_version;
@@ -633,23 +646,16 @@ function leafletmapsmarker() {
 					'parent' => 'lmm',
 					'title' => __('Add new layer','lmm'),
 					'href' => admin_url('admin.php?page=leafletmapsmarker_layer')
-				),
-				array(
-					'id' => 'lmm-help-credits',
-					'parent' => 'lmm',
-					'title' => __('Help & Credits','lmm'),
-					'href' => admin_url('admin.php?page=leafletmapsmarker_help')
-				),
-				array(
-					'id' => 'lmm-plugin-website',
-					'parent' => 'lmm',
-					'title' => 'mapsmarker.com',
-					'href' => 'http://www.mapsmarker.com',
-					'meta' => array( 'target' => '_blank', 'title' => __('Open plugin website','lmm') )
-				)				
+				)			
 			);
 			if ( current_user_can( 'activate_plugins' ) ) {
 				$menu_items = array_merge($menu_items, array(
+					array(
+						'id' => 'lmm-tools',
+						'parent' => 'lmm',
+						'title' => __('Tools','lmm'),
+						'href' => admin_url('admin.php?page=leafletmapsmarker_tools')
+					),
 					array(
 						'id' => 'lmm-settings',
 						'parent' => 'lmm',
@@ -658,6 +664,22 @@ function leafletmapsmarker() {
 					)
 				));
 			}
+			$menu_items = array_merge($menu_items, array(
+					array(
+						'id' => 'lmm-help-credits',
+						'parent' => 'lmm',
+						'title' => __('Help & Credits','lmm'),
+						'href' => admin_url('admin.php?page=leafletmapsmarker_help')
+					),
+					array(
+						'id' => 'lmm-plugin-website',
+						'parent' => 'lmm',
+						'title' => 'mapsmarker.com',
+						'href' => 'http://www.mapsmarker.com',
+						'meta' => array( 'target' => '_blank', 'title' => __('Open plugin website','lmm') )
+					)	
+				));
+			
 			foreach ($menu_items as $menu_item) {
 				$wp_admin_bar->add_menu($menu_item);
 			}
