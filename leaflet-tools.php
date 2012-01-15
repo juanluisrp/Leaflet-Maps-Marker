@@ -81,6 +81,7 @@ else {
     $wms10 = $row['lwms10'];	
 ?>
 
+Tools<br />
 	<?php $nonce= wp_create_nonce('layer-nonce'); ?>
 	<form method="post">
 		<?php wp_nonce_field('layer-nonce'); ?>
