@@ -91,7 +91,7 @@ class Leafletmapsmarker_options {
 		$settings_updated = isset($_GET['settings-updated']) ? $_GET['settings-updated'] : (isset($_GET['updated']) ? $_GET['updated'] : '');
 		if ( ( $install_note != NULL ) && ( $settings_updated == NULL ) ) {
 			$install_success_message = sprintf( __('You just successfully installed the "Leaflet Maps Marker" plugin. You can now optionally change the default settings below or <a href="%1$sadmin.php?page=leafletmapsmarker_marker">add your first marker</a>.<br/>For tutorials and help, please check the <a href="%1$sadmin.php?page=leafletmapsmarker_help">Help &amp; Credits page</a>!','lmm'), WP_ADMIN_URL); 
-			echo '<div class="updated" style="padding:10px;"><p>' . $install_success_message . '<iframe src="http://www.mapsmarker.com/counter/go.php?id=plugin_installs" frameborder="0" height="0" width="0" name="counter" scrolling="no"></iframe></p></div>';
+			echo '<div class="updated" style="padding:10px;"><p>' . $install_success_message . '</p></div>';
 		//info: check if custom icons could be unzipped
 		if ( ! file_exists(LEAFLET_PLUGIN_ICONS_DIR . DIRECTORY_SEPARATOR . 'information.png') ) {
 				echo '<div class="error" style="padding:10px;">'.__('Warning: the custom map icon directory at <code>/wp-contents/uploads/leaflet-maps-marker-icons</code> could not be created due to file permission settings on your webserver. Leaflet Maps Marker will work as designed, but only with one map icon available.<br/>You can add the included map icons manually by following the steps at <a href="http://www.mapsmarker.com/incomplete-installation" target="_blank">http://www.mapsmarker.com/incomplete-installation</a>', 'lmm').'</div>';
