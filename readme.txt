@@ -57,6 +57,7 @@ to the visitors of your website.
 * option to change the default shortcode '[mapsmarker...]'
 * dynamic preview of maps in backend (no need to reload)
 * WordPress Admin Bar integration to quickly access plugins features (can be disabled)
+* global stats for marker/layer count on mapsmarker.com (can be disabled)
 * "OGD Vienna selector": if a place within boundaries of Vienna/Austria is chosen, OGD Vienna basemaps are automatically selected
 * integrated [donation links](http://www.mapsmarker.com/donations) to show your support for this plugin :-)
 
@@ -158,6 +159,8 @@ This program is free software; you can redistribute it and/or modify it under th
 For more information on translations of the plugin and how to contribute a new translation, please visit [http://www.mapsmarker.com/languages](http://www.mapsmarker.com/languages).
 
 == Upgrade Notice ==
+= v1.3 =
+added marker mass actions and css bugfixes
 
 = 1.2.2 =
 Fix for custom marker icons not showing on certain hosting providers
@@ -179,12 +182,13 @@ Initial release
 = v1.3 - xx.01.2012 =
 * NEW: add mass actions for makers (assign markers to layer, delete markers)
 * CHANGED: flattr now embedded as static image as long loadtimes decrease usability because Google Places scripts starts only afterwards
-* REMOVED: global stats from marker/layer edits and deletes
-* REMOVED: featured sponsor in admin header
 * BUGFIX: map/panel width were not the same due to css inheritance
 * BUGFIX: links in maps were underlined on some templates
 * BUGFIX: panel API link images had borders on some templates
 * BUGFIX: text in basemap controlbox was centered on some templates
+* REMOVED: global stats from marker/layer edits and deletes
+* REMOVED: global stats for plugin installs - use downloads from WordPress repository instead for mapsmarker.com
+* REMOVED: featured sponsor in admin header
 
 = v1.2.2 - 14.01.2012 =
 * BUGFIX: custom marker icons were not shown on certain hosts due to different wp-upload-directories
