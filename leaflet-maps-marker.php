@@ -354,8 +354,7 @@ function leafletmapsmarker() {
 	$lmm_out .= '<span class="popuptext">' . $popuptext .'</span>'.PHP_EOL;
 	$lmm_out .= '</div>'.PHP_EOL;
 	}
-	//info: end mapsmarker-div
-	$lmm_out .= '</div>'.PHP_EOL;
+	$lmm_out .= '</div>'.PHP_EOL; //info: end mapsmarker-div
 	$plugin_version = get_option('leafletmapsmarker_version');
 	$lmm_out .= '<script type="text/javascript">'.PHP_EOL;
 	$lmm_out .= '/* <![CDATA[ */'.PHP_EOL;
