@@ -177,8 +177,14 @@ Initial release
 == Changelog ==
 
 = v1.3 - xx.01.2012 =
-* NEW: add mass actions for makers
-* BUGFIX: CSS issues on certain templates with map/panel width, links (border), panel API link images & text alignment of text in basemap controlbox
+* NEW: add mass actions for makers (assign markers to layer, delete markers)
+* CHANGED: flattr now embedded as static image as long loadtimes decrease usability because Google Places scripts starts only afterwards
+* REMOVED: global stats from marker/layer edits and deletes
+* REMOVED: featured sponsor in admin header
+* BUGFIX: map/panel width were not the same due to css inheritance
+* BUGFIX: links in maps were underlined on some templates
+* BUGFIX: panel API link images had borders on some templates
+* BUGFIX: text in basemap controlbox was centered on some templates
 
 = v1.2.2 - 14.01.2012 =
 * BUGFIX: custom marker icons were not shown on certain hosts due to different wp-upload-directories
