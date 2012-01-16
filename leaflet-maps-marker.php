@@ -277,12 +277,9 @@ function leafletmapsmarker() {
 	//info: starting output on frontend
 	$lmm_out = ''; 
 	$lmm_out .= '<div id="leaflet_maps_marker_'.$uid.'" style="width:' . $mapwidth.$mapwidthunit . ';">'.PHP_EOL;
-
-
 	//info: panel for layer/marker name and API URLs
 	if ($panel == 1) {
 		$lmm_out .= '<div id="lmm_panel_' . $uid . '" class="lmm-panel" style="background: ' . ((!empty($marker)) ? addslashes($lmm_options[ 'defaults_marker_panel_background_color' ]) : (!empty($layer)) ? addslashes($lmm_options[ 'defaults_layer_panel_background_color' ]) : '') . ';">'.PHP_EOL;
-
 		if (!empty($marker)) 
 		{
 			$lmm_out .= '<div style="' . addslashes($lmm_options[ 'defaults_marker_panel_paneltext_css' ]) . '">' . stripslashes($paneltext) . '</div>'.PHP_EOL;
@@ -575,20 +572,10 @@ function leafletmapsmarker() {
 	$page6 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('Tools', 'lmm'), __('Tools', 'lmm'), 'activate_plugins','leafletmapsmarker_tools', array(&$this, 'lmm_tools') );
 	$page7 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('Settings', 'lmm'), __('Settings', 'lmm'), 'activate_plugins','leafletmapsmarker_settings', array(&$this, 'lmm_settings') );
 	$page8 = add_submenu_page('leafletmapsmarker_markers', 'Leaflet Maps Marker - ' . __('Help & Credits', 'lmm'), __('Help & Credits', 'lmm'), $lmm_options[ 'capabilities_edit' ], 'leafletmapsmarker_help', array(&$this, 'lmm_help') );
-
 	//info: add javascript - leaflet.js - for admin area
 	add_action('admin_print_scripts-'.$page3, array(&$this, 'lmm_admin_enqueue_scripts'),7);
 	add_action('admin_print_scripts-'.$page5, array(&$this, 'lmm_admin_enqueue_scripts'),8);
 	add_action('admin_print_scripts-'.$page7, array(&$this, 'lmm_admin_jquery_ui'),9); 
-	//info: add flattr-script on all pages
-	add_action('admin_print_scripts-'.$page, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),10);
-	add_action('admin_print_scripts-'.$page2, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),11);
-	add_action('admin_print_scripts-'.$page3, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),12);
-	add_action('admin_print_scripts-'.$page4, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),13);
-	add_action('admin_print_scripts-'.$page5, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),14);
-	add_action('admin_print_scripts-'.$page6, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),15);
-	add_action('admin_print_scripts-'.$page7, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),16);
-	add_action('admin_print_scripts-'.$page8, array(&$this, 'lmm_admin_enqueue_scripts_flattr'),16);
 	//info: add css styles for admin area
 	add_action('admin_print_styles-'.$page, array(&$this, 'lmm_admin_enqueue_stylesheets'),17);
 	add_action('admin_print_styles-'.$page2, array(&$this, 'lmm_admin_enqueue_stylesheets'),18);
@@ -719,9 +706,6 @@ function leafletmapsmarker() {
 		'lmm_zoom_in' => __( 'Zoom in', 'lmm' ),
 		'lmm_zoom_out' => __( 'Zoom out', 'lmm' )
 		) );
-  }
-  function lmm_admin_enqueue_scripts_flattr() {
-    wp_enqueue_script( 'leafletmapsmarker-flattr', LEAFLET_PLUGIN_URL . 'js/flattr.js', array(), NULL); 
   }
   function lmm_admin_enqueue_scripts() {
 	wp_enqueue_script( array ( 'jquery' ) );
