@@ -16,8 +16,10 @@ $admin_quicklink_settings_buttons = ( current_user_can( "activate_plugins" ) ) ?
   <a class="button-secondary" href="<?php echo WP_ADMIN_URL ?>admin.php?page=leafletmapsmarker_marker"><?php _e("Add new marker", "lmm") ?></a>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
   <a class="button-secondary" href="<?php echo WP_ADMIN_URL ?>admin.php?page=leafletmapsmarker_layers"><?php _e("List all layers", "lmm") ?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a class="button-secondary" href="<?php echo WP_ADMIN_URL ?>admin.php?page=leafletmapsmarker_layer"><?php _e("Add new layer", "lmm") ?></a>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-  <a class="button-secondary" href="<?php echo WP_ADMIN_URL ?>admin.php?page=leafletmapsmarker_help"><?php _e("Help & Credits", "lmm") ?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class="button-secondary" href="<?php echo WP_ADMIN_URL ?>admin.php?page=leafletmapsmarker_tools"><?php _e("Tools", "lmm") ?></a>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
   <?php echo $admin_quicklink_settings_buttons ?>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+  <a class="button-secondary" href="<?php echo WP_ADMIN_URL ?>admin.php?page=leafletmapsmarker_help"><?php _e("Help & Credits", "lmm") ?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </p>
 <table cellpadding="5" cellspacing="0" style="border:1px solid #ccc;width:98%;background:#efefef;">
   <tr>
@@ -26,9 +28,7 @@ $admin_quicklink_settings_buttons = ( current_user_can( "activate_plugins" ) ) ?
         <!--Begin support table-->
         <table cellspacing="5">
           <tr>
-            <td style="width:185px;text-align:center;background:#fff;"><strong><?php _e('Featured sponsors','lmm') ?></strong> <a href="http://www.mapsmarker.com/sponsors" target="_blank" title="<?php esc_attr_e('Click here for more information on how to become a featured sponsor','lmm') ?>"> <img src="<?php echo LEAFLET_PLUGIN_URL ?>/img/icon-question-mark.png" width="12" height="12" border="0"/></a><br/><a href="http://mapsmarker.com/sponsors" target="_blank" title="<?php esc_attr_e('Click here for more information on how to become a featured sponsor','lmm') ?>"><img src="<?php echo LEAFLET_PLUGIN_URL ?>/img/logo-featured-sponsor.png" width="150" height="100" border="0"/></a></a><br/><a href="http://mapsmarker.com/sponsors" target="_blank" title="<?php esc_attr_e('Click here for more information on how to become a featured sponsor','lmm') ?>">www.your-url.com</a>
-            </td>
-            <td style="background:#fff;text-align:center;">
+           <td style="background:#fff;text-align:center;">
 <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="ZKVA3VKMEU2TA">
@@ -54,17 +54,13 @@ $admin_quicklink_settings_buttons = ( current_user_can( "activate_plugins" ) ) ?
 </form>
             </td>
             <td style="background:#fff;width:115px;text-align:center;"><a href="http://www.amazon.com/exec/obidos/redirect-home?tag=leafletmapsmarker-21&site=home" target="_blank" title="<?php esc_attr_e('The easiest way to support this plugin is to buy something from Amazon by using this referrer link. Note: this doesn´t cost you anything as your purchase volume won´t be increased, but I will receive 6 per cent of your purchase volume as a referral fee.','lmm') ?>"><img src="<?php echo LEAFLET_PLUGIN_URL ?>/img/donate-amazon-partnernet.jpg" style="border:1px solid #ccc;padding:4px;" width="84" height="40" border="0"/></a>
-		<br/><br/><a href="http://www.amazon.de/registry/wishlist/3P6LQRP11V1AF" target="_blank" title="<?php esc_attr_e('Another way to show your support for this plugin is to buy something from my Amazon wishlist, respectively sending me a greeting card worth from 15 to 500 $ with a personal note, which I would very much appreciate.','lmm') ?>"><img src="<?php echo LEAFLET_PLUGIN_URL ?>/img/donate-amazon.jpg" width="100" height="50" border="0"/></a></td>
-            <td style="text-align:center;width:72px;background:#fff;">Flattr <a class="FlattrButton" style="display:none;" href="http://www.mapsmarker.com" title="MapsMarker.com" lang="<?php echo WPLANG ?>">MapsMarker.com</a>
-              <noscript>
-              <a href="http://flattr.com/thing/447395/MapsMarker-com" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a>
-              </noscript>
-			</td>
+		<br/><a href="http://www.amazon.de/registry/wishlist/3P6LQRP11V1AF" target="_blank" title="<?php esc_attr_e('Another way to show your support for this plugin is to buy something from my Amazon wishlist, respectively sending me a greeting card worth from 15 to 500 $ with a personal note, which I would very much appreciate.','lmm') ?>"><img src="<?php echo LEAFLET_PLUGIN_URL ?>/img/donate-amazon.jpg" width="100" height="50" border="0"/></a><br/><a href="http://flattr.com/thing/447395/MapsMarker-com" target="_blank">
+<img src="<?php echo LEAFLET_PLUGIN_URL ?>/img/donate-flattr.png" alt="Flattr this" title="Flattr this" border="0" /></a></td>
           </tr>
         </table>
         <!--End support table-->
       </div>
 	<p><strong><?php _e('A message from the plugin´s author','lmm') ?> <a href="http://www.harm.co.at" target="_blank" title="<?php esc_attr_e('Show website of plugin author','lmm') ?>" style="text-decoration:none;">Robert Harm</a>:</strong><br/>
-			<?php _e('It is hard to continue development and support for Leaflet Maps Marker-plugin without contributions from users like you.','lmm') ?> <?php _e('If you enjoy using the plugin - <strong>particularly within a commercial context</strong> - please consider making a donation.','lmm') ?> <?php _e('Your donation help keeping the plugin free for everyone and allow me to spend more time on developing, maintaining and support.','lmm') ?> <?php _e('I´d be happy to accept your donation! Thanks!','lmm') ?> <?php _e('For more information on how to donate, please visit','lmm') ?>  <a href="http://mapsmarker.com/donations" style="text-decoration:none;" target="_blank">http://mapsmarker.com/donations</a><br/><br/>Web: <a href="http://www.mapsmarker.com"  style="text-decoration:none;" target="_blank">MapsMarker.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;Twitter: <a href="http://twitter.com/mapsmarker" style="text-decoration:none;" target="_blank">@MapsMarker</a>&nbsp;&nbsp;|&nbsp;&nbsp;Facebook: <a href="http://www.facebook.com/mapsmarker" style="text-decoration:none;" target="_blank">facebook.com/MapsMarker</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://wordpress.org/extend/plugins/leaflet-maps-marker/"  style="text-decoration:none;" target="_blank" title="<?php esc_attr_e('please rate this plugin on wordpress.org','lmm') ?>"><?php _e('Rate plugin','lmm') ?></a></p></td>
+			<?php _e('It is hard to continue development and support for Leaflet Maps Marker-plugin without contributions from users like you.','lmm') ?> <?php _e('If you enjoy using the plugin - <strong>particularly within a commercial context</strong> - please consider making a donation.','lmm') ?> <?php _e('Your donation help keeping the plugin free for everyone and allow me to spend more time on developing, maintaining and support.','lmm') ?> <?php _e('I´d be happy to accept your donation! Thanks!','lmm') ?> <?php _e('For more information on how to donate, please visit','lmm') ?>  <a href="http://mapsmarker.com/donations" style="text-decoration:none;" target="_blank">http://mapsmarker.com/donations</a><br/><br/>Web: <a href="http://www.mapsmarker.com"  style="text-decoration:none;" target="_blank">MapsMarker.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://twitter.com/mapsmarker" style="text-decoration:none;" target="_blank">Twitter</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.facebook.com/mapsmarker" style="text-decoration:none;" target="_blank">Facebook</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://github.com/robertharm/Leaflet-Maps-Marker" style="text-decoration:none;" target="_blank">Github</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://wordpress.org/extend/plugins/leaflet-maps-marker/"  style="text-decoration:none;" target="_blank" title="<?php esc_attr_e('please rate this plugin on wordpress.org','lmm') ?>"><?php _e('Rate plugin','lmm') ?></a></p></td>
   </tr>
 </table>
