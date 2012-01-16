@@ -6,20 +6,21 @@
 <div class="wrap">
 	<?php include('leaflet-admin-header.php'); ?>
 	<?php
-$action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
+$action = isset($_POST['action']) ? $_POST['action'] : '';
 if (!empty($action)) {
-	$layernonce = isset($_POST['_wpnonce']) ? $_POST['_wpnonce'] : (isset($_GET['_wpnonce']) ? $_GET['_wpnonce'] : '');
-	if (! wp_verify_nonce($layernonce, 'layer-nonce') ) { die('<br/>'.__('Security check failed - please call this function from the according Leaflet Maps Marker admin page!','lmm').''); };
-  if ($action == 'add') {
-
+	$toolnonce = isset($_POST['_wpnonce']) ? $_POST['_wpnonce'] : (isset($_GET['_wpnonce']) ? $_GET['_wpnonce'] : '');
+	if (! wp_verify_nonce($toolnonce, 'tool-nonce') ) { die('<br/>'.__('Security check failed - please call this function from the according Leaflet Maps Marker admin page!','lmm').''); };
+  if ($action == 'mass-assign') {
+		$result = $wpdb->prepare( "UPDATE $table_name_markers SET layer = %d where layer = %d", $_POST['layer_assign_to'], $_POST['layer_assign_from'] );
+		$wpdb->query( $result );
+		$wpdb->query( "OPTIMIZE TABLE $table_name_markers" );
+		echo '<p><div class="updated" style="padding:10px;">' . sprintf( esc_attr__('All markers from layer ID %1$s have successfully been assigned to layer ID %2$s','lmm'), $_POST['layer_assign_from'], $_POST['layer_assign_to']) . '</div><br/><a class="button-secondary" href="' . WP_ADMIN_URL . 'admin.php?page=leafletmapsmarker_tools">' . __('Back to Tools', 'lmm') . '</a></p>';  
+		
   }
   elseif ($action == 'edit') {
-		$result = $wpdb->prepare( "UPDATE $table_name_layers SET name = %s, basemap = %s, layerzoom = %d, mapwidth = %d, mapwidthunit = %s, mapheight = %d, panel = %d, layerviewlat = %s, layerviewlon = %s, updatedby = %s, updatedon = %s, controlbox = %d, overlays_custom = %d, overlays_custom2 = %d, overlays_custom3 = %d, overlays_custom4 = %d, wms = %d, wms2 = %d, wms3 = %d, wms4 = %d, wms5 = %d, wms6 = %d, wms7 = %d, wms8 = %d, wms9 = %d, wms10 = %d WHERE id = %d", $layername_quotes, $_POST['basemap'], $_POST['layerzoom'], $_POST['mapwidth'], $_POST['mapwidthunit'], $_POST['mapheight'], $_POST['panel'], floatval(str_replace(',', '.', $_POST['layerviewlat'])), floatval(str_replace(',', '.', $_POST['layerviewlon'])), $current_user->user_login, current_time('mysql',0), $_POST['controlbox'], $_POST['overlays_custom'], $_POST['overlays_custom2'], $_POST['overlays_custom3'], $_POST['overlays_custom4'], $wms_checkbox, $wms2_checkbox, $wms3_checkbox, $wms4_checkbox, $wms5_checkbox, $wms6_checkbox, $wms7_checkbox, $wms8_checkbox, $wms9_checkbox, $wms10_checkbox, $oid );
-		$wpdb->query( $result );
-		$wpdb->query( "OPTIMIZE TABLE $table_name_layers" );
+		
   }
   elseif ($action == 'deleteboth') {
-
   }
 elseif ($action == 'delete') {
 		$result = $wpdb->prepare( "UPDATE $table_name_markers SET layer = 0 WHERE layer = %d", $oid );
@@ -34,54 +35,45 @@ elseif ($action == 'delete') {
   }  
 }
 else {
-  global $current_user;
-  get_currentuserinfo();		
-
-    $id = intval($_GET['id']);
-    $row = $wpdb->get_row('SELECT l.id as lid, l.name as lname, l.basemap as lbasemap, l.layerzoom as llayerzoom, l.mapwidth as lmapwidth, l.mapwidthunit as lmapwidthunit, l.mapheight as lmapheight, l.panel as lpanel, l.layerviewlat as llayerviewlat, l.layerviewlon as llayerviewlon, l.createdby as lcreatedby, l.createdon as lcreatedon, l.updatedby as lupdatedby, l.updatedon as lupdatedon, l.controlbox as lcontrolbox, l.overlays_custom as loverlays_custom, l.overlays_custom2 as loverlays_custom2, l.overlays_custom3 as loverlays_custom3, l.overlays_custom4 as loverlays_custom4,l.wms as lwms, l.wms2 as lwms2, l.wms3 as lwms3, l.wms4 as lwms4, l.wms5 as lwms5, l.wms6 as lwms6, l.wms7 as lwms7, l.wms8 as lwms8, l.wms9 as lwms9, l.wms10 as lwms10, m.id as markerid, m.markername as markername, m.lat as mlat, m.lon as mlon, m.icon as micon, m.popuptext as mpopuptext, m.zoom as mzoom, m.mapwidth as mmapwidth, m.mapwidthunit as mmapwidthunit,m.mapheight as mmapheight FROM '.$table_name_layers.' as l LEFT OUTER JOIN '.$table_name_markers.' AS m ON l.id=m.layer WHERE l.id='.$id, ARRAY_A); 
-    $name = $row['lname'];
-    $basemap = $row['lbasemap'];
-    $layerzoom = $row['llayerzoom'];	
-    $mapwidth = $row['lmapwidth'];
-    $mapwidthunit = $row['lmapwidthunit'];
-    $mapheight = $row['lmapheight'];
-    $layerviewlat = $row['llayerviewlat'];	
-    $layerviewlon = $row['llayerviewlon'];		
-    $markerid = $row['markerid'];
-    $markername = $row['markername'];
-    $mlat = $row['mlat'];
-    $mlon = $row['mlon'];
-    $coords = $mlat.', '.$mlon;
-    $micon = $row['micon'];
-    $popuptext = $row['mpopuptext'];
-    $markerzoom = $row['mzoom'];
-    $markermapwidth = $row['mmapwidth'];
-    $markermapwidthunit = $row['mmapwidthunit'];
-    $markermapheight = $row['mmapheight'];
-    $panel = $row['lpanel'];
-    $markercount = $wpdb->get_var('SELECT count(*) FROM '.$table_name_layers.' as l INNER JOIN '.$table_name_markers.' AS m ON l.id=m.layer WHERE l.id='.$id);
-    $lcreatedby = $row['lcreatedby'];
-    $lcreatedon = $row['lcreatedon'];
-    $lupdatedby = $row['lupdatedby'];
-    $lupdatedon = $row['lupdatedon'];
-    $lcontrolbox = $row['lcontrolbox'];
-    $loverlays_custom = $row['loverlays_custom'];
-    $loverlays_custom2 = $row['loverlays_custom2'];
-    $loverlays_custom3 = $row['loverlays_custom3'];
-    $loverlays_custom4 = $row['loverlays_custom4'];	
-    $wms = $row['lwms'];
-    $wms2 = $row['lwms2'];
-    $wms3 = $row['lwms3'];
-    $wms4 = $row['lwms4'];
-    $wms5 = $row['lwms5'];
-    $wms6 = $row['lwms6'];
-    $wms7 = $row['lwms7'];
-    $wms8 = $row['lwms8'];
-    $wms9 = $row['lwms9'];
-    $wms10 = $row['lwms10'];	
+$layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE id>0', ARRAY_A);
 ?>
-
-Tools<br />
+<h3>Tools</h3>
+<h4><?php _e('Mass-assign markers to a layer','lmm') ?></h4>
+<?php $nonce= wp_create_nonce('tool-nonce'); ?>
+<form method="post">
+<input type="hidden" name="action" value="mass-assign" />
+<?php wp_nonce_field('tool-nonce'); ?>
+<?php _e('From layer','lmm') ?> 
+<select id="layer_assign_from" name="layer_assign_from">
+<option value="0">
+<?php _e('unassigned','lmm') ?>
+</option>
+<?php
+	foreach ($layerlist as $row)
+	echo '<option value="' . $row['id'] . '">' . stripslashes($row['name']) . ' (ID ' . $row['id'] . ')</option>';
+?>
+</select>
+<?php _e('to layer','lmm') ?>
+<select id="layer_assign_to" name="layer_assign_to">
+<option value="0">
+<?php _e('unassigned','lmm') ?>
+</option>
+<?php
+	foreach ($layerlist as $row)
+	echo '<option value="' . $row['id'] . '">' . stripslashes($row['name']) . ' (ID ' . $row['id'] . ')</option>';
+?>
+</select>
+<div style="margin:20px 0 0 0;"><input style="font-weight:bold;" class="submit button-primary" type="submit" name="mass-asign" value="<?php _e('mass-assign-markers','lmm') ?> &raquo;" onclick="return confirm('<?php _e('Do you really want to mass-assign the selected markers? (cannot be undone)','lmm') ?>')" /></div>
+	</form>
+<h4><?php _e('Delete all markers from one layer','lmm') ?></h4>
+<?php _e('Delete all markers from layer','lmm') ?>
+<select id="delete_from_layer" name="delete_from">
+<?php
+	foreach ($layerlist as $row)
+	echo '<option value="' . $row['id'] . '">' . stripslashes($row['name']) . ' (ID ' . $row['id'] . ')</option>';
+?>
+</select>
+<h4><?php _e('Delete all markers from all layers','lmm') ?></h4>
 	<?php $nonce= wp_create_nonce('layer-nonce'); ?>
 	<form method="post">
 		<?php wp_nonce_field('layer-nonce'); ?>
@@ -195,5 +187,4 @@ Tools<br />
 	
 </div>
 <!--wrap--> 
-
 <?php } ?>
