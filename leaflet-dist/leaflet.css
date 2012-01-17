@@ -1,16 +1,15 @@
 /* additional/changed styles - added by RH */
 .lmm-panel {
-	position:relative;
 	border:1px solid #ccc;
 }
 .lmm-panel-text {
 	position:relative;
 	padding:5px;
 	line-height:normal;
-	overflow:inherit;
-	border-bottom:1px solid #CCCCCC;
 }
 .lmm-panel-api {
+	position:relative;
+	z-index:5;
 	width:120px;
 	text-align:right;
 	line-height:10px;
@@ -23,7 +22,6 @@
 	padding:0px!important;
 	border:none!important;
 }
-
 .lmm-geo-tags { display:none!important; } 
 .leaflet-container {
   max-width: none;
@@ -43,22 +41,8 @@
 .leaflet-control-attribution  a {
 	text-decoration:none;
 }
-/*RH add new leaflet.css-code for updated version below - also check end of file on updates! -> img max-width override! */
-/*important: change .leaflet-container img { on updates!
-	background:no-repeat !important;
-	padding:0px;
-	margin:0px;
-	max-width: none !important;
-	border: none !important;
-	
-.leaflet-container a {
-add	border: none;	
-	
-.leaflet-control-layers .leaflet-control-layers-list,
-.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
-add	text-align:left;
 		
-/* leaflet.css - required styles */
+/* original leaflet.css styles (check on updates!) */
 .leaflet-map-pane,
 .leaflet-tile,
 .leaflet-marker-icon,
@@ -215,6 +199,7 @@ a.leaflet-active {
 .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
 	display: none;
 	text-align:left;
+	line-height:normal;
 	}
 .leaflet-control-layers-expanded .leaflet-control-layers-list {
 	display: block;
@@ -228,6 +213,9 @@ a.leaflet-active {
 	}
 .leaflet-control-layers input {
 	margin-top: 2px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
 	position: relative;
 	top: 1px;
 	}
