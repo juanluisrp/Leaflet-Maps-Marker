@@ -4164,13 +4164,13 @@ class Leafletmapsmarker_options {
 		update_option( 'leafletmapsmarker_options', $options_new );
 		}
 		/* template for plugin updates 
-		//info:  set defaults for options introduced in v1.3
-		if (get_option('leafletmapsmarker_version') == '1.2.2' )
+		//info:  set defaults for options introduced in v1.4
+		if (get_option('leafletmapsmarker_version') == '1.3' )
 		{
 			$new_options_defaults = array();
 			foreach ( $this->settings as $id => $setting ) 
 			{
-				if ( $setting['type'] != 'heading' && $setting['type'] != 'helptext' && $setting['version'] == '1.3')
+				if ( $setting['type'] != 'heading' && $setting['type'] != 'helptext' && $setting['version'] == '1.4')
 				{
 				$new_options_defaults[$id] = $setting['std'];
 				}
