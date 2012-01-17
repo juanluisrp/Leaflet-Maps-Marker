@@ -4,8 +4,8 @@
 */
 ?>
 <div class="wrap">
-	<?php include('leaflet-admin-header.php'); ?>
-	<?php
+<?php include('leaflet-admin-header.php'); ?>
+<?php
 $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : ''); 
 $addtoLayer = isset($_GET['addtoLayer']) ? intval($_GET['addtoLayer']) : (isset($_POST['layer']) ? $_POST['layer'] : ''); 
 $layername = isset($_GET['Layername']) ? stripslashes($_GET['Layername']) : ''; 
@@ -269,13 +269,11 @@ echo '<p><a class=\'button-secondary\' href=\'' . WP_ADMIN_URL . 'admin.php?page
 					<?php _e('hide','lmm') ?></p>
 				</td>
 				<td id="wmscheckboxes">
-		
 					<?php 
-					echo '<div id="leaflet_maps_marker_markermap" style="float:left;width:' . $mapwidth.$mapwidthunit . ';">'.PHP_EOL;
+					echo '<div id="lmm" style="float:left;width:' . $mapwidth.$mapwidthunit . ';">'.PHP_EOL;
 					//info: panel for marker name and API URLs
 					$panel_state = ($panel == 1) ? 'block' : 'none';
-					echo '<div id="lmm_panel_markermap" class="lmm-panel" style="display:' . $panel_state . '; background: ' . addslashes($lmm_options[ 'defaults_marker_panel_background_color' ]) . ';">'.PHP_EOL;
-					echo '<div style="' . addslashes($lmm_options[ 'defaults_marker_panel_paneltext_css' ]) . '">' . (($markername == NULL) ? __('if set, markername will be inserted here','lmm') : stripslashes($markername)) . '</div>'.PHP_EOL;
+					echo '<div id="lmm-panel" class="lmm-panel" style="display:' . $panel_state . '; background: ' . addslashes($lmm_options[ 'defaults_marker_panel_background_color' ]) . ';">'.PHP_EOL;
 					echo '<div class="lmm-panel-api">';
 						if ( (isset($lmm_options[ 'defaults_marker_panel_kml' ] ) == TRUE ) && ( $lmm_options[ 'defaults_marker_panel_kml' ] == 1 ) ) {
 						echo '<a href="' . LEAFLET_PLUGIN_URL . 'leaflet-kml.php?marker=' . $id . '" style="text-decoration:none;" title="' . __('Export as KML for Google Earth/Google Maps','lmm') . '" target="_blank"><img src="' . LEAFLET_PLUGIN_URL . 'img/icon-kml.png" width="14" height="14" alt="KML-Logo" class="lmm-panel-api-images" /></a>';
@@ -295,8 +293,10 @@ echo '<p><a class=\'button-secondary\' href=\'' . WP_ADMIN_URL . 'admin.php?page
 						if ( (isset($lmm_options[ 'defaults_marker_panel_wikitude' ] ) == TRUE ) && ( $lmm_options[ 'defaults_marker_panel_wikitude' ] == 1 ) ) {
 						echo '<a href="' . LEAFLET_PLUGIN_URL . 'leaflet-wikitude.php?marker=' . $id . '" style="text-decoration:none;" title="' . __('Export as ARML for Wikitude Augmented-Reality browser','lmm') . '" target="_blank"><img src="' . LEAFLET_PLUGIN_URL . 'img/icon-wikitude.png" width="14" height="14" alt="Wikitude-Logo" class="lmm-panel-api-images" /></a>';
 						}
-					echo '</div></div>'.PHP_EOL;
+					echo '</div>'.PHP_EOL;
+					echo '<div id="lmm-panel-text" class="lmm-panel-text" style="' . addslashes($lmm_options[ 'defaults_marker_panel_paneltext_css' ]) . '">' . (($markername == NULL) ? __('if set, markername will be inserted here','lmm') : stripslashes($markername)) . '</div>'.PHP_EOL;
 					?>
+					</div> <!--end lmm-panel-->
 					<div id="selectlayer" style="height:<?php echo $mapheight; ?>px;"></div>
 					</div><!--end mapsmarker div-->
 					<div style="float:right;margin-top:10px;"><p><strong><?php _e('WMS layers','lmm') ?></strong> <?php if (current_user_can('activate_plugins')) { echo '<a href="' . WP_ADMIN_URL . 'admin.php?page=leafletmapsmarker_settings#wms">' . __('(Settings)','lmm') . '</a>'; } ?></p>
@@ -381,14 +381,14 @@ foreach ($iconlist as $row)
 			<tr>
 				<td><label for="popuptext"><strong><?php _e('Popup text','lmm') ?>:</strong></label>
 				<br /><br />
-				<?php _e('open by default?','lmm') ?>
+				<?php _e('open by default?','lmm') ?><br/>
 				<input type="radio" name="openpopup" value="0" <?php checked($openpopup, 0 ); ?>>
 				<?php _e('no','lmm') ?>&nbsp;&nbsp;&nbsp;
 				<input type="radio" name="openpopup" value="1" <?php checked($openpopup, 1); ?>>
-				<?php _e('yes','lmm') ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+				<?php _e('yes','lmm') ?><br/>
 				<small>
 				<?php _e('If no is selected, the popup will only be visible after clicking on the marker on marker- or layer-maps. If yes is selected, the popup is shown by default on marker-maps but not on layer-maps, where this feature is not supported','lmm') ?>
-				</small>
+				</small></p>
 				</td>
 				<td>
 				<?php 
@@ -679,9 +679,6 @@ var marker,selectlayer,osm_mapnik,osm_osmarender,mapquest_osm,mapquest_aerial,og
   <?php }?>
   //info: load wms layer when checkbox gets checked
 	$('#wmscheckboxes input:checkbox').click(function(el) {
-		console.info(el.target.checked);
-		console.info(el.target.id);
-		console.info(window[el.target.id]);
 		if(el.target.checked) {
 			selectlayer.addLayer(window[el.target.id]);
 		} else {
@@ -718,15 +715,18 @@ var marker,selectlayer,osm_mapnik,osm_osmarender,mapquest_osm,mapquest_aerial,og
       marker.bindPopup('<?php echo preg_replace('/(\015\012)|(\015)|(\012)/','<br/>',$popuptext) ?>')<?php  if ($openpopup == 1) { echo '.openPopup()'; } ?>;
       <?php }?>
   });
-  var mapElement = $('#selectlayer'), mapWidth = $('#mapwidth'), mapHeight = $('#mapheight'), popupText = $('#popuptext'), lat = $('#lat'), lon = $('#lon'), panel = $('#lmm_panel_markermap'), leaflet_maps_marker_markermap = $('#leaflet_maps_marker_markermap');
+  var mapElement = $('#selectlayer'), mapWidth = $('#mapwidth'), mapHeight = $('#mapheight'), popupText = $('#popuptext'), lat = $('#lat'), lon = $('#lon'), panel = $('#lmm-panel'), lmm = $('#lmm'), markername = $('#markername');
+	markername.on('blur', function(e) { 
+		document.getElementById('lmm-panel-text').innerHTML = markername.val();
+	});
 	mapWidth.blur(function() {
 		if(!isNaN(mapWidth.val())) {
-			leaflet_maps_marker_markermap.css("width",mapWidth.val()+$('input:radio[name=mapwidthunit]:checked').val());
+			lmm.css("width",mapWidth.val()+$('input:radio[name=mapwidthunit]:checked').val());
 			selectlayer.invalidateSize();
 		}
 	});
 	$('input:radio[name=mapwidthunit]').click(function() {
-			leaflet_maps_marker_markermap.css("width",mapWidth.val()+$('input:radio[name=mapwidthunit]:checked').val());
+			lmm.css("width",mapWidth.val()+$('input:radio[name=mapwidthunit]:checked').val());
 			selectlayer.invalidateSize();
 	});
 	mapHeight.blur(function() {
