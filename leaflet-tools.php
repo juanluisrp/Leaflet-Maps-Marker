@@ -36,9 +36,7 @@ if (!empty($action)) {
 } else {
 $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE id>0', ARRAY_A);
 ?>
-
 <h3>Tools</h3>
-
 <?php $nonce= wp_create_nonce('tool-nonce'); ?>
 <form method="post">
 <input type="hidden" name="action" value="mass_assign" />
@@ -51,18 +49,23 @@ $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE 
 		<td style="vertical-align:middle;">
 		<?php _e('Source','lmm') ?>: 
 		<select id="layer_assign_from" name="layer_assign_from">
-		<option value="0"><?php _e('unassigned','lmm') ?></option>
+		<?php $markercount_layer0 = $wpdb->get_var('SELECT count(*) FROM '.$table_name_layers.' as l INNER JOIN '.$table_name_markers.' AS m ON l.id=m.layer WHERE l.id=0'); ?>
+		<option value="0">ID 0 - <?php _e('unassigned','lmm') ?> (<?php echo $markercount_layer0; ?> <?php _e('marker','lmm'); ?>)</option>
 		<?php
-		foreach ($layerlist as $row)
-			echo '<option value="' . $row['id'] . '">' . stripslashes($row['name']) . ' (ID ' . $row['id'] . ')</option>';
+		foreach ($layerlist as $row) {
+			$markercount = $wpdb->get_var('SELECT count(*) FROM '.$table_name_layers.' as l INNER JOIN '.$table_name_markers.' AS m ON l.id=m.layer WHERE l.id='.$row['id']);
+			echo '<option value="' . $row['id'] . '">ID ' . $row['id'] . ' - ' . stripslashes($row['name']) . ' (' . $markercount .' ' . __('marker','lmm') . ')</option>';
+		}
 		?>
 		</select>
 		<?php _e('Target','lmm') ?>: 
 		<select id="layer_assign_to" name="layer_assign_to">
-		<option value="0"><?php _e('unassigned','lmm') ?></option>
+		<option value="0">ID 0 - <?php _e('unassigned','lmm') ?> (<?php echo $markercount_layer0; ?> <?php _e('marker','lmm'); ?>)</option>
 		<?php
-		foreach ($layerlist as $row)
-			echo '<option value="' . $row['id'] . '">' . stripslashes($row['name']) . ' (ID ' . $row['id'] . ')</option>';
+		foreach ($layerlist as $row) {
+			$markercount = $wpdb->get_var('SELECT count(*) FROM '.$table_name_layers.' as l INNER JOIN '.$table_name_markers.' AS m ON l.id=m.layer WHERE l.id='.$row['id']);
+			echo '<option value="' . $row['id'] . '">ID ' . $row['id'] . ' - ' . stripslashes($row['name']) . ' (' . $markercount .' ' . __('marker','lmm') . ')</option>';
+		}
 		?>
 		</select>
 		</td>
@@ -73,7 +76,6 @@ $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE 
 </table>
 </form>
 <br/><br/>
-
 <?php $nonce= wp_create_nonce('tool-nonce'); ?>
 <form method="post">
 <input type="hidden" name="action" value="mass_delete_from_layer" />
@@ -86,10 +88,12 @@ $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE 
 		<td style="vertical-align:middle;">
 		<?php _e('Layer','lmm') ?>: 
 		<select id="delete_from_layer" name="delete_from_layer">
-		<option value="0"><?php _e('unassigned','lmm') ?></option>
+		<option value="0">ID 0 - <?php _e('unassigned','lmm') ?> (<?php echo $markercount_layer0; ?> <?php _e('marker','lmm'); ?>)</option>
 		<?php
-		foreach ($layerlist as $row)
-			echo '<option value="' . $row['id'] . '">' . stripslashes($row['name']) . ' (ID ' . $row['id'] . ')</option>';
+		foreach ($layerlist as $row) {
+			$markercount = $wpdb->get_var('SELECT count(*) FROM '.$table_name_layers.' as l INNER JOIN '.$table_name_markers.' AS m ON l.id=m.layer WHERE l.id='.$row['id']);
+			echo '<option value="' . $row['id'] . '">ID ' . $row['id'] . ' - ' . stripslashes($row['name']) . ' (' . $markercount .' ' . __('marker','lmm') . ')</option>';
+		}
 		?>
 		</select>
 		</td>
@@ -100,14 +104,18 @@ $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE 
 </table>
 </form>
 <br/><br/>
-
 <?php $nonce= wp_create_nonce('tool-nonce'); ?>
 <form method="post">
 <input type="hidden" name="action" value="mass_delete_all_markers" />
 <?php wp_nonce_field('tool-nonce'); ?>
 <table class="widefat fixed" style="width:auto;">
 	<tr style="background-color:#efefef;">
-		<td colspan="2"><strong><?php _e('Delete all markers from all layers','lmm') ?></strong></td>
+		<?php 
+		$markercount_all = $wpdb->get_var('SELECT count(*) FROM '.$table_name_markers.''); 
+		$layercount_all = $wpdb->get_var('SELECT count(*) FROM '.$table_name_layers.''); 
+		$delete_all = sprintf( esc_attr__('Delete all %1$s markers from all %2$s layers','lmm'), $markercount_all, $layercount_all); 
+		?>
+		<td colspan="2"><strong><?php echo $delete_all ?></strong></td>
 	</tr>
 	<tr>
 		<td style="vertical-align:middle;">
