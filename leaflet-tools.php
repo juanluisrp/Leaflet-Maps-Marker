@@ -43,7 +43,7 @@ $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE 
 <?php wp_nonce_field('tool-nonce'); ?>
 <table class="widefat fixed" style="width:auto;">
 	<tr style="background-color:#efefef;">
-		<td colspan="2"><strong><?php _e('Mass-assign markers to a layer','lmm') ?></strong></td>
+		<td colspan="2"><strong><?php _e('Move markers to a layer','lmm') ?></strong></td>
 	</tr>
 	<tr>
 		<td style="vertical-align:middle;">
@@ -70,7 +70,7 @@ $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE 
 		</select>
 		</td>
 		<td>
-		<input style="font-weight:bold;" class="submit button-primary" type="submit" name="mass_asign" value="<?php _e('mass-assign-markers','lmm') ?> &raquo;" onclick="return confirm('<?php _e('Do you really want to mass-assign the selected markers?','lmm') ?>')" />
+		<input style="font-weight:bold;" class="submit button-primary" type="submit" name="mass_asign" value="<?php _e('move markers','lmm') ?> &raquo;" onclick="return confirm('<?php _e('Do you really want to move the selected markers?','lmm') ?>')" />
 		</td>
 	</tr>
 </table>
