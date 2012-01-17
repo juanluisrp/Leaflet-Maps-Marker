@@ -53,6 +53,7 @@ to the visitors of your website.
 * option to add marker directly to posts or pages without saving them to your database
 * audit log for changes on markers & layers (saving first created by/on and last updated by/on info)
 * search within your marker list
+* mass actions for markers (assignment to layers, deletions)
 * option to reset plugin settings to defaults
 * option to change the default shortcode '[mapsmarker...]'
 * dynamic preview of maps in backend (no need to reload)
@@ -130,6 +131,7 @@ For demo maps please visit [http://www.mapsmarker.com/demo](http://www.mapsmarke
 10. Backend: layerlist - for easy administration of all your layers
 11. Backend: plugin settings page allows you to easily set all necessary settings & restore the defaults if you messed something up
 12. Backend: csv-export of all markers - just copy and paste into your favorite spreadsheet application for use in other applications
+13. Backend: tools section - allows mass-actions more markers (assignements, deletions)
 
 == Other Notes ==
 
@@ -160,7 +162,7 @@ For more information on translations of the plugin and how to contribute a new t
 
 == Upgrade Notice ==
 = v1.3 =
-added marker mass actions and css bugfixes
+added marker mass actions and browser/template compatibility bugfixes
 
 = 1.2.2 =
 Fix for custom marker icons not showing on certain hosting providers
@@ -179,16 +181,20 @@ Initial release
 
 == Changelog ==
 
-= v1.3 - xx.01.2012 =
+= v1.3 - 17.01.2012 =
 * NEW: add mass actions for makers (assign markers to layer, delete markers)
 * CHANGED: flattr now embedded as static image as long loadtimes decrease usability because Google Places scripts starts only afterwards
+* CHANGED: marker-/layername for panel in backend now gets refreshed dynamically after entering in form field
+* CHANGED: geo microformat tags are now also added to maps added directly via shortcode
+* OPTIMIZED: div structure and order for maps on frontend
 * BUGFIX: map/panel width were not the same due to css inheritance
+* BUGFIX: map css partially broken in IE < 9 when viewing backend maps
 * BUGFIX: links in maps were underlined on some templates
 * BUGFIX: panel API link images had borders on some templates
-* BUGFIX: text in basemap controlbox was centered on some templates
-* REMOVED: global stats from marker/layer edits and deletes
-* REMOVED: global stats for plugin installs - use downloads from WordPress repository instead for mapsmarker.com
+* BUGFIX: text in layer controlbox was centered on some templates
+* REMOVED: global stats for plugin installs, marker/layer edits and deletions
 * REMOVED: featured sponsor in admin header
+* REMOVED: developers comments from css- and js-files
 
 = v1.2.2 - 14.01.2012 =
 * BUGFIX: custom marker icons were not shown on certain hosts due to different wp-upload-directories
