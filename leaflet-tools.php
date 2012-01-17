@@ -70,7 +70,7 @@ $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE 
 		</select>
 		</td>
 		<td>
-		<input style="font-weight:bold;" class="submit button-primary" type="submit" name="mass_asign" value="<?php _e('mass-assign-markers','lmm') ?> &raquo;" onclick="return confirm('<?php _e('Do you really want to mass-assign the selected markers? (cannot be undone)','lmm') ?>')" />
+		<input style="font-weight:bold;" class="submit button-primary" type="submit" name="mass_asign" value="<?php _e('mass-assign-markers','lmm') ?> &raquo;" onclick="return confirm('<?php _e('Do you really want to mass-assign the selected markers?','lmm') ?>')" />
 		</td>
 	</tr>
 </table>
@@ -113,7 +113,7 @@ $layerlist = $wpdb->get_results('SELECT * FROM ' . $table_name_layers . ' WHERE 
 		<?php 
 		$markercount_all = $wpdb->get_var('SELECT count(*) FROM '.$table_name_markers.''); 
 		$layercount_all = $wpdb->get_var('SELECT count(*) FROM '.$table_name_layers.''); 
-		$delete_all = sprintf( esc_attr__('Delete all %1$s markers from all %2$s layers','lmm'), $markercount_all, $layercount_all); 
+		$delete_all = sprintf( esc_attr__('Delete all %1$s markers from all %2$s layers','lmm'), $markercount_all, $layercount_all);
 		?>
 		<td colspan="2"><strong><?php echo $delete_all ?></strong></td>
 	</tr>
