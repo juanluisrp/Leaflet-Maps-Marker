@@ -4,8 +4,8 @@
 */
 ?>
 <div class="wrap">
-	<?php include('leaflet-admin-header.php'); ?>
-	<?php
+<?php include('leaflet-admin-header.php'); ?>
+<?php
 $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
 $oid = isset($_POST['id']) ? $_POST['id'] : (isset($_GET['id']) ? intval($_GET['id']) : '');
 $lat_check = isset($_POST['layerviewlat']) ? $_POST['layerviewlat'] : (isset($_GET['layerviewlat']) ? $_GET['layerviewlat'] : '');
@@ -197,7 +197,7 @@ echo '<p><a class=\'button-secondary\' href=\'' . WP_ADMIN_URL . 'admin.php?page
 			<?php } ?>
 			<tr>
 				<td><label for="name"><strong><?php _e('Layer name', 'lmm') ?>:</strong></label></td>
-				<td><input style="width: 640px;" maxlenght="255" type="text" name="name" value="<?php echo stripslashes($name) ?>" /></td>
+				<td><input style="width: 640px;" maxlenght="255" type="text" id="layername" name="name" value="<?php echo stripslashes($name) ?>" /></td>
 			</tr>
 			<tr>
 				<td><label for="coords"><strong><?php _e('Layer center','lmm') ?>:</strong></label></td>
@@ -242,11 +242,10 @@ echo '<p><a class=\'button-secondary\' href=\'' . WP_ADMIN_URL . 'admin.php?page
 				</td>
 				<td id="wmscheckboxes">
 					<?php 
-					echo '<div id="leaflet_maps_marker_layermap" style="float:left;width:' . $mapwidth.$mapwidthunit . ';">'.PHP_EOL;
-					//info: panel for marker name and API URLs
+					echo '<div id="lmm" style="float:left;width:' . $mapwidth.$mapwidthunit . ';">'.PHP_EOL;
+					//info: panel for layer name and API URLs
 					$panel_state = ($panel == 1) ? 'block' : 'none';
-					echo '<div id="lmm_panel_layermap" class="lmm-panel" style="display:' . $panel_state . '; background: ' . addslashes($lmm_options[ 'defaults_layer_panel_background_color' ]) . ';">'.PHP_EOL;
-					echo '<div style="' . addslashes($lmm_options[ 'defaults_layer_panel_paneltext_css' ]) . '">' . (($name == NULL) ? __('if set, layername will be inserted here','lmm') : stripslashes($name)) . '</div>'.PHP_EOL;
+					echo '<div id="lmm-panel" class="lmm-panel" style="display:' . $panel_state . '; background: ' . addslashes($lmm_options[ 'defaults_layer_panel_background_color' ]) . ';">'.PHP_EOL;
 					echo '<div class="lmm-panel-api">';
 						if ( (isset($lmm_options[ 'defaults_layer_panel_kml' ] ) == TRUE ) && ( $lmm_options[ 'defaults_layer_panel_kml' ] == 1 ) ) {
 						echo '<a href="' . LEAFLET_PLUGIN_URL . 'leaflet-kml.php?layer=' . $id . '" style="text-decoration:none;" title="' . __('Export as KML for Google Earth/Google Maps','lmm') . '" target="_blank"><img src="' . LEAFLET_PLUGIN_URL . 'img/icon-kml.png" width="14" height="14" alt="KML-Logo" class="lmm-panel-api-images" /></a>';
@@ -266,8 +265,10 @@ echo '<p><a class=\'button-secondary\' href=\'' . WP_ADMIN_URL . 'admin.php?page
 						if ( (isset($lmm_options[ 'defaults_layer_panel_wikitude' ] ) == TRUE ) && ( $lmm_options[ 'defaults_layer_panel_wikitude' ] == 1 ) ) {
 						echo '<a href="' . LEAFLET_PLUGIN_URL . 'leaflet-wikitude.php?layer=' . $id . '" style="text-decoration:none;" title="' . __('Export as ARML for Wikitude Augmented-Reality browser','lmm') . '" target="_blank"><img src="' . LEAFLET_PLUGIN_URL . 'img/icon-wikitude.png" width="14" height="14" alt="Wikitude-Logo" class="lmm-panel-api-images" /></a>';
 						}
-					echo '</div></div>'.PHP_EOL;
+					echo '</div>'.PHP_EOL;
+					echo '<div id="lmm-panel-text" class="lmm-panel-text" style="' . addslashes($lmm_options[ 'defaults_layer_panel_paneltext_css' ]) . '">' . (($name == NULL) ? __('if set, layername will be inserted here','lmm') : stripslashes($name)) . '</div>'.PHP_EOL;
 					?>
+					</div> <!--end lmm-panel-->
 					<div id="selectlayer" style="height:<?php echo $mapheight; ?>px;"></div>
 					</div><!--end mapsmarker div-->
 					<div style="float:right;margin-top:10px;"><p><strong><?php _e('WMS layers','lmm') ?></strong> <?php if (current_user_can('activate_plugins')) { echo '<a href="' . WP_ADMIN_URL . 'admin.php?page=leafletmapsmarker_settings#wms">' . __('(Settings)','lmm') . '</a>'; } ?></p>
@@ -759,9 +760,6 @@ var markers = {};
   
   //info: load wms layer when checkbox gets checked
 	$('#wmscheckboxes input:checkbox').click(function(el) {
-		console.info(el.target.checked);
-		console.info(el.target.id);
-		console.info(window[el.target.id]);
 		if(el.target.checked) {
 			selectlayer.addLayer(window[el.target.id]);
 		} else {
@@ -795,15 +793,18 @@ var markers = {};
       selectlayer.setView(e.latlng,selectlayer.getZoom());
       mapcentermarker.setLatLng(e.latlng);
   });
-  var mapElement = $('#selectlayer'), mapWidth = $('#mapwidth'), mapHeight = $('#mapheight'), layerviewlat = $('#layerviewlat'), layerviewlon = $('#layerviewlon'), panel = $('#lmm_panel_layermap'), leaflet_maps_marker_layermap = $('#leaflet_maps_marker_layermap');
+  var mapElement = $('#selectlayer'), mapWidth = $('#mapwidth'), mapHeight = $('#mapheight'), layerviewlat = $('#layerviewlat'), layerviewlon = $('#layerviewlon'), panel = $('#lmm-panel'), lmm = $('#lmm'), layername = $('#layername');
+	layername.on('blur', function(e) { 
+		document.getElementById('lmm-panel-text').innerHTML = layername.val();
+	});
 	mapWidth.blur(function() {
 		if(!isNaN(mapWidth.val())) {
-			leaflet_maps_marker_layermap.css("width",mapWidth.val()+$('input:radio[name=mapwidthunit]:checked').val());
+			lmm.css("width",mapWidth.val()+$('input:radio[name=mapwidthunit]:checked').val());
 			selectlayer.invalidateSize();
 		}
 	});
 	$('input:radio[name=mapwidthunit]').click(function() {
-			leaflet_maps_marker_layermap.css("width",mapWidth.val()+$('input:radio[name=mapwidthunit]:checked').val());
+			lmm.css("width",mapWidth.val()+$('input:radio[name=mapwidthunit]:checked').val());
 			selectlayer.invalidateSize();
 	});
 	mapHeight.blur(function() {
