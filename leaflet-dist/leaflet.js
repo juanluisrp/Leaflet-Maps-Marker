@@ -1,13 +1,5 @@
 /* Leaflet.js
- Hinweis RH - bei Updates beruecksichtigen - Achtung beim Update
- - Zoom-in/out -> leafletmapsmarker_L10n.lmm_zoom_in & leafletmapsmarker_L10n.lmm_zoom_out
- - maxZoom:18 auf maxZoom:19 gesetzt
- - iconSize:new L.Point(25,41) auf iconSize:new L.Point(32,37)
- - shadowSize:new L.Point(41,41) auf shadowSize:new L.Point(51,37)
- - iconAnchor:new L.Point(13,41) auf iconAnchor:new L.Point(16,35)
- - popupAnchor:new L.Point(0,-33) auf popupAnchor:new L.Point(0,-30)
-  
- Copyright (c) 2010-2011, CloudMade, Vladimir Agafonkin
+ Copyright (c) 2010-2012, CloudMade, Vladimir Agafonkin
  Leaflet is a BSD-licensed JavaScript library for map display and interaction.
  See http://leaflet.cloudmade.com for more information.
 */
