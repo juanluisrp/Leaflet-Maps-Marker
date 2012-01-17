@@ -1,23 +1,25 @@
 /* additional/changed styles - added by RH */
 .lmm-panel {
 	position:relative;
-	padding:5px;
-	border-right:1px solid #ccc;
-	border-top:1px solid #ccc;
-	border-left:1px solid #ccc;
+	border:1px solid #ccc;
 }
-
+.lmm-panel-text {
+	position:relative;
+	padding:5px;
+	line-height:normal;
+	overflow:inherit;
+	border-bottom:1px solid #CCCCCC;
+}
 .lmm-panel-api {
 	width:120px;
 	text-align:right;
-	position:absolute;
-	right:5px;
-	top:5px;
+	line-height:10px;
+	float:right;
+	padding-top:8px;
 }
-
 .lmm-panel-api-images {
 	background:no-repeat!important;
-	margin:0px!important;
+	margin:0px 5px 0 0!important;
 	padding:0px!important;
 	border:none!important;
 }
