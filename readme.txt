@@ -161,6 +161,9 @@ This program is free software; you can redistribute it and/or modify it under th
 For more information on translations of the plugin and how to contribute a new translation, please visit [http://www.mapsmarker.com/languages](http://www.mapsmarker.com/languages).
 
 == Upgrade Notice ==
+= v1.4 =
+added support for routing services (yournavigation.org, openrouteservice.org, Google Maps)
+
 = v1.3 =
 added marker mass actions and browser/template compatibility bugfixes
 
@@ -180,6 +183,11 @@ Added new features and bugfixes - see http://www.mapsmarker.com/changelog for de
 Initial release
 
 == Changelog ==
+
+= v1.4 - xx.01.2012 =
+* NEW: added support for routing service from yournavigation.org on marker maps
+* NEW: added support for routing service from openrouteservice.org on marker maps
+* NEW: added support for routing service from Google Maps on marker maps
 
 = v1.3 - 17.01.2012 =
 * NEW: add mass actions for makers (assign markers to layer, delete markers)
