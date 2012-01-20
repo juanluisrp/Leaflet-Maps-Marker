@@ -3892,6 +3892,14 @@ class Leafletmapsmarker_options {
 			'type'    => 'checkbox',
 			'std'     => 0 
 		);	
+		$this->settings['misc_marker_listing_columns_panelstatus'] = array(
+			'version' => '1.4',
+			'section' => 'misc',
+			'title'    => '',
+			'desc'    => __('Panel status','lmm'),
+			'type'    => 'checkbox',
+			'std'     => 0 
+		);	
 		$this->settings['misc_marker_listing_columns_mapsize'] = array(
 			'version' => '1.0',
 			'section' => 'misc',
@@ -4067,6 +4075,14 @@ class Leafletmapsmarker_options {
 			'section' => 'misc',
 			'title'    => '',
 			'desc'    => __('Map size','lmm'),
+			'type'    => 'checkbox',
+			'std'     => 0 
+		);	
+		$this->settings['misc_layer_listing_columns_panelstatus'] = array(
+			'version' => '1.4',
+			'section' => 'misc',
+			'title'    => '',
+			'desc'    => __('Panel status','lmm'),
 			'type'    => 'checkbox',
 			'std'     => 0 
 		);	
