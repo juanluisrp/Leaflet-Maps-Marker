@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: MapsMarker.com\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-17 23:27+0100\n"
-"PO-Revision-Date: 2012-01-17 23:29+0100\n"
+"PO-Revision-Date: 2012-01-20 11:00+0100\n"
 "Last-Translator: Robert Harm <info@mapsmarker.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -938,7 +938,7 @@ msgstr "Basiskarte/Ebenen Kontrollbox im Frontend"
 #: ../leaflet-layer.php:232
 #: ../leaflet-marker.php:260
 msgid "hidden"
-msgstr "verstecken"
+msgstr "verborgen"
 
 #: ../class-leaflet-options.php:2661
 #: ../class-leaflet-options.php:2940
