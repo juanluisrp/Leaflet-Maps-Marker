@@ -161,9 +161,6 @@ This program is free software; you can redistribute it and/or modify it under th
 For more information on translations of the plugin and how to contribute a new translation, please visit [http://www.mapsmarker.com/languages](http://www.mapsmarker.com/languages).
 
 == Upgrade Notice ==
-= v1.4 =
-added support for routing services (yournavigation.org, openrouteservice.org, Google Maps)
-
 = v1.3 =
 added marker mass actions and browser/template compatibility bugfixes
 
@@ -188,6 +185,10 @@ Initial release
 * NEW: added support for routing service from yournavigation.org on marker maps
 * NEW: added support for routing service from openrouteservice.org on marker maps
 * NEW: added support for routing service from Google Maps on marker maps
+* NEW: mass-actions for changing default values for existing markers (map size, icon, panel status, zoom, basemap...)
+* CHANGED: panel status can now also be selected as column for marker/layer listing page
+* CHANGED: controlbox status column for markers/layers list view now displays text instead of 0/1/2
+* BUGFIX: several German translation text strings
 
 = v1.3 - 17.01.2012 =
 * NEW: add mass actions for makers (assign markers to layer, delete markers)
