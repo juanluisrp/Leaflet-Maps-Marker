@@ -24,7 +24,7 @@ class Leafletmapsmarker_options {
 		$this->sections['defaults_marker']   = 'Marker defaults';
 		$this->sections['defaults_layer']   = 'Layer defaults';
 		$this->sections['google_places']   = 'Google Places';
-		$this->sections['routing']   = 'Routing';
+		$this->sections['directions']   = 'Directions';
 		$this->sections['ar']   = 'Augmented-Reality';
 		$this->sections['misc']   = 'Misc';
 		$this->sections['reset']        = 'Reset to Defaults';
@@ -35,7 +35,7 @@ class Leafletmapsmarker_options {
 		$this->sections['defaults_marker']   = __( 'Marker defaults', 'lmm' );
 		$this->sections['defaults_layer']   = __( 'Layer defaults', 'lmm' );
 		$this->sections['google_places']   = __( 'Google Places', 'lmm' );
-		$this->sections['routing']   = __( 'Routing', 'lmm' );
+		$this->sections['directions']   = __( 'Directions', 'lmm' );
 		$this->sections['ar']   = __( 'Augmented-Reality', 'lmm' );
 		$this->sections['misc']   = __( 'Misc', 'lmm' );
 		$this->sections['reset']        = __( 'Reset to Defaults', 'lmm' );
@@ -240,9 +240,9 @@ class Leafletmapsmarker_options {
 			<li>' . __('Google Places search prefix','lmm') . '</li></ul></span>';
 	}	
 	/**
-	 * Listing for routing section
+	 * Listing for directions section
 	 */
-	public function display_routing_section() {
+	public function display_directions_section() {
 		echo '<span class="leafletmapsmarker-listings"><p><strong>Index</strong></p><ul style="list-style-type:disc;margin-left:24px;">
 			<li>yournavigation.org</li>
 			<li>openrouteservice.org</li>
@@ -3477,25 +3477,25 @@ class Leafletmapsmarker_options {
 		/*===========================================
 		*
 		*
-		* section Routing
+		* section Directions
 		*
 		*
 		===========================================*/	
 		/*
-		* AR General
+		* Directions General
 		*/
-		$this->settings['routing_general_helptext1'] = array(
+		$this->settings['directions_general_helptext1'] = array(
 			'version' => '1.4',
-			'section' => 'routing',
+			'section' => 'directions',
 			'std'     => '', 
 			'title'   => '',
-			'desc'    => __( 'Please select the routing provider which should be used for the link in the panel on top of marker maps. Visitors of your site can use this link to get a description on how to get to your marker location by car, bus or bike. ADD SCREENSHOT', 'lmm') . '<br/><br/><img src='. LEAFLET_PLUGIN_URL .'/img/help-augmented-reality-samples.jpg />',
+			'desc'    => __( 'Please select the directions provider which should be used for the link in the panel on top of marker maps. Visitors of your site can use this link to get a description on how to get to your marker location by car, bus or bike. ADD SCREENSHOT', 'lmm') . '<br/><br/><img src='. LEAFLET_PLUGIN_URL .'/img/help-augmented-reality-samples.jpg />',
 			'type'    => 'helptext'
 		);
-		$this->settings['routing_provider'] = array(
+		$this->settings['directions_provider'] = array(
 			'version' => '1.4',
-			'section' => 'routing',
-			'title'   => __('Use the following routing provider','lmm'),
+			'section' => 'directions',
+			'title'   => __('Use the following directions provider','lmm'),
 			'desc'    => '',
 			'type'    => 'radio',
 			'std'     => 'yournavigation',
@@ -3508,16 +3508,16 @@ class Leafletmapsmarker_options {
 		/*
 		* yournavigation.org
 		*/
-		$this->settings['routing_yournavigation_heading'] = array(
+		$this->settings['directions_yournavigation_heading'] = array(
 			'version' => '1.4',
-			'section' => 'routing',
+			'section' => 'directions',
 			'title'   => '', 
 			'desc'    => __( 'yournavigation.org settings', 'lmm'),
 			'type'    => 'heading'
 		);
-		$this->settings['routing_yournavigation_helptext'] = array(
+		$this->settings['directions_yournavigation_helptext'] = array(
 			'version' => '1.4',
-			'section' => 'routing',
+			'section' => 'directions',
 			'std'     => '', 
 			'title'   => '',
 			'desc'    => __( 'helptext -> delete if not needed', 'lmm'),
@@ -3527,16 +3527,16 @@ class Leafletmapsmarker_options {
 		/*
 		* openrouteservice.org
 		*/
-		$this->settings['routing_openrouteservice_heading'] = array(
+		$this->settings['directions_openrouteservice_heading'] = array(
 			'version' => '1.4',
-			'section' => 'routing',
+			'section' => 'directions',
 			'title'   => '', 
 			'desc'    => __( 'openrouteservice.org settings', 'lmm'),
 			'type'    => 'heading'
 		);
-		$this->settings['routing_openrouteservice_helptext'] = array(
+		$this->settings['directions_openrouteservice_helptext'] = array(
 			'version' => '1.4',
-			'section' => 'routing',
+			'section' => 'directions',
 			'std'     => '', 
 			'title'   => '',
 			'desc'    => __( 'helptext -> delete if not needed', 'lmm'),
@@ -3546,16 +3546,16 @@ class Leafletmapsmarker_options {
 		/*
 		* Google Maps
 		*/
-		$this->settings['routing_googlemaps_heading'] = array(
+		$this->settings['directions_googlemaps_heading'] = array(
 			'version' => '1.4',
-			'section' => 'routing',
+			'section' => 'directions',
 			'title'   => '', 
-			'desc'    => __( 'Google Maps routing settings', 'lmm'),
+			'desc'    => __( 'Google Maps directions settings', 'lmm'),
 			'type'    => 'heading'
 		);
-		$this->settings['routing_googlemaps_helptext'] = array(
+		$this->settings['directions_googlemaps_helptext'] = array(
 			'version' => '1.4',
-			'section' => 'routing',
+			'section' => 'directions',
 			'std'     => '', 
 			'title'   => '',
 			'desc'    => __( 'helptext -> delete if not needed', 'lmm'),
@@ -4231,8 +4231,8 @@ class Leafletmapsmarker_options {
 				add_settings_section( $slug, $title, array( &$this, 'display_defaults_marker_section' ), 'leafletmapsmarker_settings' );
 			else if ( $slug == 'google_places' )
 				add_settings_section( $slug, $title, array( &$this, 'display_google_places_section' ), 'leafletmapsmarker_settings' );
-			else if ( $slug == 'routing' )
-				add_settings_section( $slug, $title, array( &$this, 'display_routing_section' ), 'leafletmapsmarker_settings' );
+			else if ( $slug == 'directions' )
+				add_settings_section( $slug, $title, array( &$this, 'display_directions_section' ), 'leafletmapsmarker_settings' );
 			else if ( $slug == 'misc' )
 				add_settings_section( $slug, $title, array( &$this, 'display_misc_section' ), 'leafletmapsmarker_settings' );
 			else
