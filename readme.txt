@@ -186,13 +186,14 @@ Initial release - see http://www.mapsmarker.com/v1.0 for more details
 
 = v1.4 - xx.01.2012 =
 * [Blog post with more details about this release](http://www.mapsmarker.com/v1.4)
-* NEW: added support for routing service from yournavigation.org on marker maps
-* NEW: added support for routing service from openrouteservice.org on marker maps
-* NEW: added support for routing service from Google Maps on marker maps
+* NEW: added support for routing service from Google Maps
+* NEW: added support for routing service from yournavigation.org
+* NEW: added support for routing service from openrouteservice.org
 * NEW: mass-actions for changing default values for existing markers (map size, icon, panel status, zoom, basemap...)
 * CHANGED: panel status can now also be selected as column for marker/layer listing page
 * CHANGED: controlbox status column for markers/layers list view now displays text instead of 0/1/2
 * BUGFIX: several German translation text strings
+* BUGFIX: markers added directly with shortcode caused error on frontend
 
 = v1.3 - 17.01.2012 =
 * [Blog post with more details about this release](http://www.mapsmarker.com/v1.3)
