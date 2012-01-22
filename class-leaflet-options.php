@@ -244,9 +244,10 @@ class Leafletmapsmarker_options {
 	 */
 	public function display_directions_section() {
 		echo '<span class="leafletmapsmarker-listings"><p><strong>Index</strong></p><ul style="list-style-type:disc;margin-left:24px;">
+			<li>' . __('General settings','lmm') . '</li>
+			<li>Google Maps</li>
 			<li>yournavigation.org</li>
-			<li>openrouteservice.org</li>
-			<li>Google Maps</li></ul></span>';
+			<li>openrouteservice.org</li></ul></span>';
 	}		
 	/**
 	 * Listing for misc section
@@ -2720,11 +2721,19 @@ class Leafletmapsmarker_options {
 			)
 		);	
 		// defaults_marker - active API links in panel
+		$this->settings['defaults_marker_panel_directions'] = array(
+			'version' => '1.4',
+			'section' => 'defaults_marker',
+			'title'    => __('Visible API links in panel','lmm'),
+			'desc'    => __('Directions','lmm') .  ' <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-car.png">',
+			'type'    => 'checkbox',
+			'std'     => 1 
+		);
 		$this->settings['defaults_marker_panel_kml'] = array(
 			'version' => '1.0',
 			'section' => 'defaults_marker',
-			'title'    => __('Visible API links in panel','lmm'),
-			'desc'    => 'KML',
+			'title'    => '',
+			'desc'    => 'KML <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-kml.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);
@@ -2732,7 +2741,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.1',
 			'section' => 'defaults_marker',
 			'title'    => '',
-			'desc'    => __('Fullscreen','lmm'),
+			'desc'    => __('Fullscreen','lmm') .  ' <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-fullscreen.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);		
@@ -2740,7 +2749,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.1',
 			'section' => 'defaults_marker',
 			'title'    => '',
-			'desc'    => __('QR code','lmm'),
+			'desc'    => __('QR code','lmm') .  ' <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-qr-code.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);		
@@ -2748,7 +2757,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.0',
 			'section' => 'defaults_marker',
 			'title'   => '',
-			'desc'    => 'GeoJSON',
+			'desc'    => 'GeoJSON <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-json.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);
@@ -2756,7 +2765,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.2',
 			'section' => 'defaults_marker',
 			'title'   => '',
-			'desc'    => 'GeoRSS',
+			'desc'    => 'GeoRSS <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-georss.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);
@@ -2764,7 +2773,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.0',
 			'section' => 'defaults_marker',
 			'title'   => '',
-			'desc'    => 'Wikitude',
+			'desc'    => 'Wikitude <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-wikitude.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);		
@@ -3209,7 +3218,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.0',
 			'section' => 'defaults_layer',
 			'title'    => __('Visible API links in panel','lmm'),
-			'desc'    => 'KML',
+			'desc'    => 'KML <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-kml.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);
@@ -3217,7 +3226,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.1',
 			'section' => 'defaults_layer',
 			'title'    => '',
-			'desc'    => __('Fullscreen','lmm'),
+			'desc'    => __('Fullscreen','lmm') .  ' <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-fullscreen.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);		
@@ -3225,7 +3234,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.1',
 			'section' => 'defaults_layer',
 			'title'    => '',
-			'desc'    => __('QR code','lmm'),
+			'desc'    => __('QR code','lmm') .  ' <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-qr-code.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);		
@@ -3233,7 +3242,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.0',
 			'section' => 'defaults_layer',
 			'title'   => '',
-			'desc'    => 'GeoJSON',
+			'desc'    => 'GeoJSON <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-json.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);
@@ -3241,7 +3250,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.2',
 			'section' => 'defaults_layer',
 			'title'   => '',
-			'desc'    => 'GeoRSS',
+			'desc'    => 'GeoRSS <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-georss.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);
@@ -3249,7 +3258,7 @@ class Leafletmapsmarker_options {
 			'version' => '1.0',
 			'section' => 'defaults_layer',
 			'title'   => '',
-			'desc'    => 'Wikitude',
+			'desc'    => 'Wikitude <img src="' . LEAFLET_PLUGIN_URL . '/img/icon-wikitude.png">',
 			'type'    => 'checkbox',
 			'std'     => 1 
 		);		
@@ -3484,6 +3493,13 @@ class Leafletmapsmarker_options {
 		/*
 		* Directions General
 		*/
+		$this->settings['directions_general_heading'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => '', 
+			'desc'    => __( 'General settings', 'lmm'),
+			'type'    => 'heading'
+		);		
 		$this->settings['directions_general_helptext1'] = array(
 			'version' => '1.4',
 			'section' => 'directions',
@@ -3498,142 +3514,24 @@ class Leafletmapsmarker_options {
 			'title'   => __('Use the following directions provider','lmm'),
 			'desc'    => '',
 			'type'    => 'radio',
-			'std'     => 'yours',
+			'std'     => 'googlemaps',
 			'choices' => array(
-				'yours' => __('yournavigation.org (based on OpenStreetMap, worldwide)','lmm'),
-				'ors' => __('openrouteservice.org (based on OpenStreetMap, Europe only)','lmm'),
-				'googlemaps' => __('Google Maps (worldwide)','lmm')
+				'googlemaps' => __('Google Maps (worldwide)','lmm') . ' - <a href="http://maps.google.com/maps?saddr=Vienna&daddr=Linz&hl=de&sll=37.0625,-95.677068&sspn=59.986788,135.263672&geocode=FS6Z3wIdO9j5ACmfyjZRngdtRzFGW6JRiuXC_Q%3BFfwa4QIdBvzZAClNhZn6lZVzRzHEdXlXLClTfA&vpsrc=0&mra=ls&t=m&z=9&layer=t" style="text-decoration:none;" target="_blank">Demo</a>',
+				'yours' => __('yournavigation.org (based on OpenStreetMap, worldwide)','lmm') . ' - <a href="http://www.yournavigation.org/?flat=52.215636&flon=6.963946&tlat=52.2573&tlon=6.1799&v=motorcar&fast=1&layer=mapnik" style="text-decoration:none;" target="_blank">Demo</a>',
+				'ors' => __('openrouteservice.org (based on OpenStreetMap, Europe only)','lmm') . ' - <a href="http://openrouteservice.org/index.php?start=7.0892567,50.7265543&end=7.0986258,50.7323634&lat=50.72905&lon=7.09574&zoom=15&pref=Fastest&lang=de" style="text-decoration:none;" target="_blank">Demo</a>'
 			)
 		);		
-		/*
-		* yournavigation.org
-		*/
-		$this->settings['directions_yours_heading'] = array(
+		$this->settings['directions_popuptext_panel'] = array(
 			'version' => '1.4',
 			'section' => 'directions',
-			'title'   => '', 
-			'desc'    => __( 'yournavigation.org settings', 'lmm'),
-			'type'    => 'heading'
-		);
-		$this->settings['directions_yours_helptext'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'std'     => '', 
-			'title'   => '',
-			'desc'    => 'Website: <a style="text-decoration:none;" href="http://yournavigation.org" target="_blank">http://www.yournavigation.org</a> (<a href="http://www.yournavigation.org/?flat=52.215636&flon=6.963946&tlat=52.2573&tlon=6.1799&v=motorcar&fast=1&layer=mapnik" style="text-decoration:none;" target="_blank">Demo</a>)',
-			'type'    => 'helptext'
-		);
-		$this->settings['directions_yours_type_of_transport'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'title'   => __('Type of transport','lmm'),
+			'title'   => __('Attach directions panel to popup text on each marker SCREENSHOT','lmm'),
 			'desc'    => '',
 			'type'    => 'radio',
-			'std'     => 'motorcar',
+			'std'     => 'yes',
 			'choices' => array(
-				'motorcar' => __('Motorcar','lmm'),
-				'bicycle' => __('Bicycle','lmm'),
-				'foot' => __('Foot','lmm')
-			)
-		);		
-		$this->settings['directions_yours_route_type'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'title'   => __('Route type','lmm'),
-			'desc'    => '',
-			'type'    => 'radio',
-			'std'     => '1',
-			'choices' => array(
-				'0' => __('fastest route','lmm'),
-				'1' => __('shortest route','lmm')
-			)
-		);		
-		$this->settings['directions_yours_layer'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'title'   => __('Gosmore instance to calculate the route','lmm'),
-			'desc'    => '',
-			'type'    => 'radio',
-			'std'     => 'mapnik',
-			'choices' => array(
-				'mapnik' => __('mapnik (for normal routing using car, bicycle or foot)','lmm'),
-				'cn' => __('cn (for using bicycle routing using cycle route networks only)','lmm')
-			)
-		);		
-		
-		/*
-		* openrouteservice.org
-		*/
-		$this->settings['directions_ors_heading'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'title'   => '', 
-			'desc'    => __( 'openrouteservice.org settings', 'lmm'),
-			'type'    => 'heading'
-		);
-		$this->settings['directions_ors_helptext'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'std'     => '', 
-			'title'   => '',
-			'desc'    => 'Website: <a style="text-decoration:none;" href="http://openrouteservice.org" target="_blank">http://openrouteservice.org</a> (<a href="http://openrouteservice.org/index.php?start=7.0892567,50.7265543&end=7.0986258,50.7323634&lat=50.72905&lon=7.09574&zoom=15&pref=Fastest&lang=de" style="text-decoration:none;" target="_blank">Demo</a>)',
-			'type'    => 'helptext'
-		);
-		$this->settings['directions_ors_route_preferences'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'title'   => __('Route preferences','lmm'),
-			'desc'    => '',
-			'type'    => 'radio',
-			'std'     => 'shortest',
-			'choices' => array(
-				'fastest' => __('fastest route','lmm'),
-				'shortest' => __('shortest route','lmm'),
-				'pedestrian' => __('route for pedestrians','lmm'),
-				'bicycle' => __('route for bicycles','lmm')								
-			)
-		);	
-		$this->settings['directions_ors_language'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'title'   => __('Language of route instructions','lmm'),
-			'desc'    => '',
-			'type'    => 'radio',
-			'std'     => 'en',
-			'choices' => array(
-				'en' => __('English','lmm'),
-				'de' => __('German','lmm'),
-				'it' => __('Italian','lmm'),
-				'fr' => __('French','lmm'),
-				'es' => __('Spanish','lmm')
-			)
-		);	
-		$this->settings['directions_ors_no_motorways'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'title'   => __('No motorways?','lmm'),
-			'desc'    => '',
-			'type'    => 'radio',
-			'std'     => 'false',
-			'choices' => array(
-				'false' => __('false','lmm'),
-				'true' => __('true','lmm')
-			)
-		);	
-		$this->settings['directions_ors_no_tollways'] = array(
-			'version' => '1.4',
-			'section' => 'directions',
-			'title'   => __('No tollways?','lmm'),
-			'desc'    => '',
-			'type'    => 'radio',
-			'std'     => 'shortest',
-			'choices' => array(
-				'false' => __('false','lmm'),
-				'true' => __('true','lmm')							
-			)
-		);	
-
-
+				'yes' => __('yes','lmm'),
+				'no' => __('no','lmm')			)
+		);			
 		/*
 		* Google Maps
 		*/
@@ -3644,14 +3542,14 @@ class Leafletmapsmarker_options {
 			'desc'    => __( 'Google Maps directions settings', 'lmm'),
 			'type'    => 'heading'
 		);
-		$this->settings['directions_googlemaps_helptext'] = array(
+		$this->settings['directions_googlemaps_helptext1'] = array(
 			'version' => '1.4',
 			'section' => 'directions',
 			'std'     => '', 
 			'title'   => '',
-			'desc'    => 'Website: <a style="text-decoration:none;" href="http://maps.google.com/" target="_blank">http://maps.google.com/</a> (<a href="http://maps.google.com/maps?saddr=Vienna&daddr=Linz&hl=de&sll=37.0625,-95.677068&sspn=59.986788,135.263672&geocode=FS6Z3wIdO9j5ACmfyjZRngdtRzFGW6JRiuXC_Q%3BFfwa4QIdBvzZAClNhZn6lZVzRzHEdXlXLClTfA&vpsrc=0&mra=ls&t=m&z=9&layer=t" style="text-decoration:none;" target="_blank">Demo</a>)',
+			'desc'    => '',
 			'type'    => 'helptext'
-		);
+		);			
 		$this->settings['directions_googlemaps_map_type'] = array(
 			'version' => '1.4',
 			'section' => 'directions',
@@ -3734,7 +3632,13 @@ class Leafletmapsmarker_options {
 				'de' => __('German','lmm'),
 				'it' => __('Italian','lmm'),
 				'fr' => __('French','lmm'),
-				'es' => __('Spanish','lmm')
+				'es' => __('Spanish','lmm'),
+				'cn' => __('Chinese (simplified)','lmm'),
+				'nl' => __('Dutch','lmm'),
+				'ja' => __('Japanese','lmm'),
+				'ca' => __('Catalan','lmm'),
+				'gl' => __('Galego','lmm'),
+				'eu' => __('Euskara','lmm')
 			)
 		);
 		$this->settings['directions_googlemaps_overview_map'] = array(
@@ -3748,7 +3652,135 @@ class Leafletmapsmarker_options {
 				'0' => __('hidden','lmm'),
 				'1' => __('visible','lmm')
 			)
+		);			
+		
+		/*
+		* yournavigation.org
+		*/
+		$this->settings['directions_yours_heading'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => '', 
+			'desc'    => __( 'yournavigation.org settings', 'lmm'),
+			'type'    => 'heading'
+		);
+		$this->settings['directions_yours_helptext1'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'std'     => '', 
+			'title'   => '',
+			'desc'    => '',
+			'type'    => 'helptext'
 		);		
+		$this->settings['directions_yours_type_of_transport'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => __('Type of transport','lmm'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'motorcar',
+			'choices' => array(
+				'motorcar' => __('Motorcar','lmm'),
+				'bicycle' => __('Bicycle','lmm'),
+				'foot' => __('Foot','lmm')
+			)
+		);		
+		$this->settings['directions_yours_route_type'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => __('Route type','lmm'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => '1',
+			'choices' => array(
+				'0' => __('fastest route','lmm'),
+				'1' => __('shortest route','lmm')
+			)
+		);		
+		$this->settings['directions_yours_layer'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => __('Gosmore instance to calculate the route','lmm'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'mapnik',
+			'choices' => array(
+				'mapnik' => __('mapnik (for normal routing using car, bicycle or foot)','lmm'),
+				'cn' => __('cn (for using bicycle routing using cycle route networks only)','lmm')
+			)
+		);		
+		
+		/*
+		* openrouteservice.org
+		*/
+		$this->settings['directions_ors_heading'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => '', 
+			'desc'    => __( 'openrouteservice.org settings', 'lmm'),
+			'type'    => 'heading'
+		);
+		$this->settings['directions_ors_helptext1'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'std'     => '', 
+			'title'   => '',
+			'desc'    => '',
+			'type'    => 'helptext'
+		);			
+		$this->settings['directions_ors_route_preferences'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => __('Route preferences','lmm'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'Shortest',
+			'choices' => array(
+				'Fastest' => __('fastest route','lmm'),
+				'Shortest' => __('shortest route','lmm'),
+				'Pedestrian' => __('route for pedestrians','lmm'),
+				'Bicycle' => __('route for bicycles','lmm')								
+			)
+		);	
+		$this->settings['directions_ors_language'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => __('Language of route instructions','lmm'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'en',
+			'choices' => array(
+				'en' => __('English','lmm'),
+				'de' => __('German','lmm'),
+				'it' => __('Italian','lmm'),
+				'fr' => __('French','lmm'),
+				'es' => __('Spanish','lmm')
+			)
+		);	
+		$this->settings['directions_ors_no_motorways'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => __('No motorways?','lmm'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'false',
+			'choices' => array(
+				'false' => __('false','lmm'),
+				'true' => __('true','lmm')
+			)
+		);	
+		$this->settings['directions_ors_no_tollways'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'title'   => __('No tollways?','lmm'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'false',
+			'choices' => array(
+				'false' => __('false','lmm'),
+				'true' => __('true','lmm')							
+			)
+		);	
 
 		/*===========================================
 		*
