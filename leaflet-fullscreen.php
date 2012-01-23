@@ -95,7 +95,7 @@ if (isset($_GET['layer'])) {
 	//info: panel for layer/marker name and API URLs
 	if ($panel == 1) {
 		$lmm_out .= '<div id="panel_top_' . $uid . '" style="background: ' . addslashes($lmm_options[ 'defaults_layer_panel_background_color' ]) . '; width:99%; padding:5px;">'.PHP_EOL;
-		$lmm_out .= '<span style="' . addslashes($lmm_options[ 'defaults_layer_panel_paneltext_css' ]) . '">' . $paneltext . '</span><span style="float:right;width:120px;text-align:right;">';
+		$lmm_out .= '<span style="' . addslashes($lmm_options[ 'defaults_layer_panel_paneltext_css' ]) . '">' . $paneltext . '</span><span class="lmm-panel-api-fullscreen">';
 		if ( (isset($lmm_options[ 'defaults_layer_panel_kml' ] ) == TRUE ) && ( $lmm_options[ 'defaults_layer_panel_kml' ] == 1 ) ) {
 			$lmm_out .= '<a href="' . LEAFLET_PLUGIN_URL . 'leaflet-kml.php?layer=' . $id . '" style="text-decoration:none;" title="' . __('Export as KML for Google Earth/Google Maps','lmm') . '" target="_blank"><img src="' . LEAFLET_PLUGIN_URL . 'img/icon-kml.png" width="14" height="14" alt="KML-Logo" class="lmm-panel-api-images" /></a>';
 		}
@@ -420,7 +420,7 @@ elseif (isset($_GET['marker'])) {
 	//info: panel for layer/marker name and API URLs
 	if ($panel == 1) {
 		$lmm_out .= '<div id="panel_top_' . $uid . '" style="background: ' . addslashes($lmm_options[ 'defaults_marker_panel_background_color' ]) . '; width:99%; padding:5px;">'.PHP_EOL;
-		$lmm_out .= '<span style="' . addslashes($lmm_options[ 'defaults_marker_panel_paneltext_css' ]) . '">' . $paneltext . '</span><span style="float:right;width:120px;text-align:right;">';
+		$lmm_out .= '<span style="' . addslashes($lmm_options[ 'defaults_marker_panel_paneltext_css' ]) . '">' . $paneltext . '</span><span class="lmm-panel-api-fullscreen">';
 		if ( (isset($lmm_options[ 'defaults_marker_panel_directions' ] ) == TRUE ) && ( $lmm_options[ 'defaults_marker_panel_directions' ] == 1 ) ) {
 				if ($lmm_options['directions_provider'] == 'googlemaps') {
 					if ((isset($lmm_options[ 'directions_googlemaps_route_type_walking' ] ) == TRUE ) && ( $lmm_options[ 'directions_googlemaps_route_type_walking' ] == 1 )) { $yours_transport_type_icon = 'icon-walk.png'; } else { $yours_transport_type_icon = 'icon-car.png'; }
