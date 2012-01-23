@@ -2,6 +2,30 @@
 /*
     List all markers - Leaflet Maps Marker Plugin
 */
+global $wpdb;
+$lmm_options = get_option( 'leafletmapsmarker_options' );
+$table_name_markers = $wpdb->prefix.'leafletmapsmarker_markers';
+$table_name_layers = $wpdb->prefix.'leafletmapsmarker_layers';
+$radius = 1;
+$pagenum = isset($_POST['paged']) ? intval($_POST['paged']) : (isset($_GET['paged']) ? intval($_GET['paged']) : 1);
+$columnsort = isset($_GET['orderby']) ? mysql_real_escape_string($_GET['orderby']) : 'id'; 
+$columnsortorder = isset($_GET['order']) ? mysql_real_escape_string($_GET['order']) : 'asc'; 
+$start = ($pagenum - 1) * intval($lmm_options[ 'markers_per_page' ]);
+$action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
+$searchtext = isset($_POST['searchtext']) ? $_POST['searchtext'] : (isset($_GET['searchtext']) ? mysql_real_escape_string($_GET['searchtext']) : '');
+if ($action == 'search') {
+	$markersearchnonce = isset($_POST['_wpnonce']) ? $_POST['_wpnonce'] : '';
+		if (! wp_verify_nonce($markersearchnonce, 'markersearch-nonce') ) die('<br/>'.__('Security check failed - please call this function from the according Leaflet Maps Marker admin page!','lmm').'');
+        $mcount = intval($wpdb->get_var('SELECT COUNT(*) FROM '.$table_name_markers.' WHERE markername like \'%'.$searchtext.'%'.'\' OR popuptext like \'%'.$searchtext.'%'.'\''));
+		$marklist = $wpdb->get_results('SELECT m.id,CONCAT(m.lat,\',\',m.lon) AS coords,m.basemap,m.icon,m.popuptext,m.layer,m.zoom,m.openpopup as openpopup,m.lat,m.lon,m.mapwidth,m.mapheight,m.mapwidthunit,m.markername,m.panel,m.createdby,m.createdon,m.updatedby,m.updatedon,m.controlbox,m.overlays_custom,m.overlays_custom2,m.overlays_custom3,m.overlays_custom4,m.wms,m.wms2,m.wms3,m.wms4,m.wms5,m.wms6,m.wms7,m.wms8,m.wms9,m.wms10,l.name AS layername,l.id as layerid FROM '.$table_name_markers.' AS m LEFT OUTER JOIN '.$table_name_layers.' AS l ON m.layer=l.id WHERE m.markername like \'%'.$searchtext.'%'.'\' OR m.popuptext like \'%'.$searchtext.'%'.'\' order by '.$columnsort.' '.$columnsortorder.' LIMIT '.intval($lmm_options[ 'markers_per_page' ]).' OFFSET '.$start, ARRAY_A);
+	}
+	  else
+        {
+        $mcount = intval($wpdb->get_var('SELECT COUNT(*) FROM '.$table_name_markers));
+ 	$marklist = $wpdb->get_results('SELECT m.id,CONCAT(m.lat,\',\',m.lon) AS coords,m.basemap,m.icon,m.popuptext,m.layer,m.zoom,m.openpopup as openpopup,m.lat,m.lon,m.mapwidth,m.mapheight,m.mapwidthunit,m.markername,m.panel,m.createdby,m.createdon,m.updatedby,m.updatedon,m.controlbox,m.overlays_custom,m.overlays_custom2,m.overlays_custom3,m.overlays_custom4,m.wms,m.wms2,m.wms3,m.wms4,m.wms5,m.wms6,m.wms7,m.wms8,m.wms9,m.wms10,l.name AS layername,l.id as layerid FROM '.$table_name_markers.' AS m LEFT OUTER JOIN '.$table_name_layers.' AS l ON m.layer=l.id order by '.$columnsort.' '.$columnsortorder.' LIMIT '.intval($lmm_options[ 'markers_per_page' ]).' OFFSET '.$start, ARRAY_A);
+		}
+if ($start > $mcount or $start < 0)
+$start = 0;
 //info:  get pagination
 $getorder = isset($_GET['order']) ? htmlspecialchars($_GET['order']) : ''; 
 if ($getorder == 'asc') { $sortorder = 'desc'; } else { $sortorder= 'asc'; };
