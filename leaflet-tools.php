@@ -6,6 +6,10 @@
 <div class="wrap">
 <?php include('leaflet-admin-header.php'); ?>
 <?php
+global $wpdb;
+$lmm_options = get_option( 'leafletmapsmarker_options' );
+$table_name_markers = $wpdb->prefix.'leafletmapsmarker_markers';
+$table_name_layers = $wpdb->prefix.'leafletmapsmarker_layers';
 $markercount_all = $wpdb->get_var('SELECT count(*) FROM '.$table_name_markers.''); 
 $layercount_all = $wpdb->get_var('SELECT count(*) FROM '.$table_name_layers.''); 
 $action = isset($_POST['action']) ? $_POST['action'] : '';
