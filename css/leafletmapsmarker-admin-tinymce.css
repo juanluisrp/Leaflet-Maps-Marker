@@ -1,6 +1,6 @@
 /* TinyMCE specific rules for Leaflet Maps Marker */
 html .mcecontentbody {
-	max-width:300px;
+	max-width:301px;
 	word-wrap: break-word; 
 }
 .mcecontentbody a {
