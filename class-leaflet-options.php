@@ -3520,11 +3520,11 @@ class Leafletmapsmarker_options {
 				'yours' => __('yournavigation.org (based on OpenStreetMap, worldwide)','lmm') . ' - <a href="http://www.yournavigation.org/?flat=52.215636&flon=6.963946&tlat=52.2573&tlon=6.1799&v=motorcar&fast=1&layer=mapnik" style="text-decoration:none;" target="_blank">Demo</a>',
 				'ors' => __('openrouteservice.org (based on OpenStreetMap, Europe only)','lmm') . ' - <a href="http://openrouteservice.org/index.php?start=7.0892567,50.7265543&end=7.0986258,50.7323634&lat=50.72905&lon=7.09574&zoom=15&pref=Fastest&lang=de" style="text-decoration:none;" target="_blank">Demo</a>'
 			)
-		);		
+		);	
 		$this->settings['directions_popuptext_panel'] = array(
 			'version' => '1.4',
 			'section' => 'directions',
-			'title'   => __('Attach directions panel to popup text on each marker SCREENSHOT','lmm'),
+			'title'   => __('Attach directions panel to popup text on each marker','lmm'),
 			'desc'    => '',
 			'type'    => 'radio',
 			'std'     => 'yes',
@@ -3532,6 +3532,14 @@ class Leafletmapsmarker_options {
 				'yes' => __('yes','lmm'),
 				'no' => __('no','lmm')			)
 		);			
+		$this->settings['directions_general_helptext2'] = array(
+			'version' => '1.4',
+			'section' => 'directions',
+			'std'     => '', 
+			'title'   => '',	
+			'desc'    => '<img src="'. LEAFLET_PLUGIN_URL .'/img/help-directions-popuptext-panel.jpg" />',
+			'type'    => 'helptext'
+		);
 		/*
 		* Google Maps
 		*/
@@ -3781,7 +3789,6 @@ class Leafletmapsmarker_options {
 				'true' => __('true','lmm')							
 			)
 		);	
-
 		/*===========================================
 		*
 		*
@@ -4500,7 +4507,6 @@ class Leafletmapsmarker_options {
 		$options_new = array_merge($options_current, $new_options_defaults);
 		update_option( 'leafletmapsmarker_options', $options_new );
 		}
-		/* template for plugin updates 
 		//info:  set defaults for options introduced in v1.4
 		if (get_option('leafletmapsmarker_version') == '1.3' )
 		{
@@ -4508,6 +4514,23 @@ class Leafletmapsmarker_options {
 			foreach ( $this->settings as $id => $setting ) 
 			{
 				if ( $setting['type'] != 'heading' && $setting['type'] != 'helptext' && $setting['version'] == '1.4')
+				{
+				$new_options_defaults[$id] = $setting['std'];
+				}
+			}
+		$options_current = get_option( 'leafletmapsmarker_options' );
+		$options_new = array_merge($options_current, $new_options_defaults);
+		update_option( 'leafletmapsmarker_options', $options_new );
+		}
+
+		/* template for plugin updates 
+		//info:  set defaults for options introduced in v1.5
+		if (get_option('leafletmapsmarker_version') == '1.4' )
+		{
+			$new_options_defaults = array();
+			foreach ( $this->settings as $id => $setting ) 
+			{
+				if ( $setting['type'] != 'heading' && $setting['type'] != 'helptext' && $setting['version'] == '1.5')
 				{
 				$new_options_defaults[$id] = $setting['std'];
 				}
