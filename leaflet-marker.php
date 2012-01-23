@@ -6,6 +6,10 @@
 <div class="wrap">
 <?php include('leaflet-admin-header.php'); ?>
 <?php
+global $wpdb;
+$lmm_options = get_option( 'leafletmapsmarker_options' );
+$table_name_markers = $wpdb->prefix.'leafletmapsmarker_markers';
+$table_name_layers = $wpdb->prefix.'leafletmapsmarker_layers';
 $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : ''); 
 $addtoLayer = isset($_GET['addtoLayer']) ? intval($_GET['addtoLayer']) : (isset($_POST['layer']) ? $_POST['layer'] : ''); 
 $layername = isset($_GET['Layername']) ? stripslashes($_GET['Layername']) : ''; 
@@ -450,7 +454,7 @@ foreach ($iconlist as $row)
 							$a["theme_advanced_statusbar_location"] = "bottom";
 							return $a;'));
 							wp_tiny_mce(true);
-						}						
+						}			
 					echo '<textarea id="popuptext" name="popuptext">' . stripslashes($popuptext) . '</textarea>';
 					}
 				?>
@@ -666,11 +670,17 @@ var marker,selectlayer,osm_mapnik,osm_osmarender,mapquest_osm,mapquest_aerial,og
  $avoidtolls = (isset($lmm_options[ 'directions_googlemaps_route_type_tolls' ] ) == TRUE ) && ( $lmm_options[ 'directions_googlemaps_route_type_tolls' ] == 1 ) ? '&dirflg=t' : '';
  $publictransport = (isset($lmm_options[ 'directions_googlemaps_route_type_public_transport' ] ) == TRUE ) && ( $lmm_options[ 'directions_googlemaps_route_type_public_transport' ] == 1 ) ? '&dirflg=r' : '';
  $walking = (isset($lmm_options[ 'directions_googlemaps_route_type_walking' ] ) == TRUE ) && ( $lmm_options[ 'directions_googlemaps_route_type_walking' ] == 1 ) ? '&dirflg=w' : '';
- $popuptext = $popuptext . '<div style="border-top:1px solid #f0f0e7;padding-top:5px;margin-top:5px;"><a href="http://maps.google.com/maps?daddr=' . $lat . ',' . $lon . '&t=' . $lmm_options[ 'directions_googlemaps_map_type' ] . '&layer=' . $lmm_options[ 'directions_googlemaps_traffic' ] . '&doflg=' . $lmm_options[ 'directions_googlemaps_distance_units' ] . $avoidhighways . $avoidtolls . $publictransport . $walking . '&hl=' . $lmm_options[ 'directions_googlemaps_host_language' ] . '&om=' . $lmm_options[ 'directions_googlemaps_overview_map' ] . '" target="_blank" title="' . esc_attr__('Get directions','lmm') . '">' . __('Directions','lmm') . '</a></div>'; 
+ $directions_settings_link = (current_user_can('activate_plugins')) ? ' (<a href="' . WP_ADMIN_URL . 'admin.php?page=leafletmapsmarker_settings#directions">' . __('Settings','lmm') . '</a>)' : '';
+ $popuptext_css = ($popuptext != NULL) ? "border-top:1px solid #f0f0e7;padding-top:5px;margin-top:5px;" : "";
+ $popuptext = $popuptext . '<div style="' . $popuptext_css . '"><a href="http://maps.google.com/maps?daddr=' . $lat . ',' . $lon . '&t=' . $lmm_options[ 'directions_googlemaps_map_type' ] . '&layer=' . $lmm_options[ 'directions_googlemaps_traffic' ] . '&doflg=' . $lmm_options[ 'directions_googlemaps_distance_units' ] . $avoidhighways . $avoidtolls . $publictransport . $walking . '&hl=' . $lmm_options[ 'directions_googlemaps_host_language' ] . '&om=' . $lmm_options[ 'directions_googlemaps_overview_map' ] . '" target="_blank" title="' . esc_attr__('Get directions','lmm') . '">' . __('Directions','lmm') . '</a>' . $directions_settings_link . '</div>'; 
  } else if ( ($lmm_options['directions_popuptext_panel'] == 'yes') && ($lmm_options['directions_provider'] == 'yours') ) {
- $popuptext = $popuptext . '<div style="border-top:1px solid #f0f0e7;padding-top:5px;margin-top:5px;"><a href="http://www.yournavigation.org/?tlat=' . $lat . '&tlon=' . $lon . '&v=' . $lmm_options[ 'directions_yours_type_of_transport' ] . '&fast=' . $lmm_options[ 'directions_yours_route_type' ] . '&layer=' . $lmm_options[ 'directions_yours_layer' ] . '" target="_blank" title="' . esc_attr__('Get directions','lmm') . '">' . __('Directions','lmm') . '</a></div>'; 
+ $directions_settings_link = (current_user_can('activate_plugins')) ? ' (<a href="' . WP_ADMIN_URL . 'admin.php?page=leafletmapsmarker_settings#directions">' . __('Settings','lmm') . '</a>)' : '';
+ $popuptext_css = ($popuptext != NULL) ? "border-top:1px solid #f0f0e7;padding-top:5px;margin-top:5px;" : "";
+ $popuptext = $popuptext . '<div style="' . $popuptext_css . '"><a href="http://www.yournavigation.org/?tlat=' . $lat . '&tlon=' . $lon . '&v=' . $lmm_options[ 'directions_yours_type_of_transport' ] . '&fast=' . $lmm_options[ 'directions_yours_route_type' ] . '&layer=' . $lmm_options[ 'directions_yours_layer' ] . '" target="_blank" title="' . esc_attr__('Get directions','lmm') . '">' . __('Directions','lmm') . '</a>' . $directions_settings_link . '</div>'; 
  } else if ( ($lmm_options['directions_popuptext_panel'] == 'yes') && ($lmm_options['directions_provider'] == 'ors') ) {
- $popuptext = $popuptext . '<div style="border-top:1px solid #f0f0e7;padding-top:5px;margin-top:5px;"><a href="http://openrouteservice.org/index.php?end=' . $lon . ',' . $lat . '&pref=' . $lmm_options[ 'directions_ors_route_preferences' ] . '&lang=' . $lmm_options[ 'directions_ors_language' ] . '&noMotorways=' . $lmm_options[ 'directions_ors_no_motorways' ] . '&noTollways=' . $lmm_options[ 'directions_ors_no_tollways' ] . '" target="_blank" title="' . esc_attr__('Get directions','lmm') . '">' . __('Directions','lmm') . '</a></div>'; 
+ $directions_settings_link = (current_user_can('activate_plugins')) ? ' (<a href="' . WP_ADMIN_URL . 'admin.php?page=leafletmapsmarker_settings#directions">' . __('Settings','lmm') . '</a>)' : '';
+ $popuptext_css = ($popuptext != NULL) ? "border-top:1px solid #f0f0e7;padding-top:5px;margin-top:5px;" : "";
+ $popuptext = $popuptext . '<div style="' . $popuptext_css . '"><a href="http://openrouteservice.org/index.php?end=' . $lon . ',' . $lat . '&pref=' . $lmm_options[ 'directions_ors_route_preferences' ] . '&lang=' . $lmm_options[ 'directions_ors_language' ] . '&noMotorways=' . $lmm_options[ 'directions_ors_no_motorways' ] . '&noTollways=' . $lmm_options[ 'directions_ors_no_tollways' ] . '" target="_blank" title="' . esc_attr__('Get directions','lmm') . '">' . __('Directions','lmm') . '</a>' . $directions_settings_link . '</div>'; 
  }
  ?>
   
