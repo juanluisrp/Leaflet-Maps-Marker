@@ -2,13 +2,13 @@
 Contributors:      harmr
 Plugin Name:       Leaflet Maps Marker
 Plugin URI:        http://www.mapsmarker.com
-Tags:              map, maps, Leaflet, OpenStreetMap, geoJSON, json, jsonp, OSM, travelblog, opendata, open data, opengov, open government, ogdwien, google maps, googlemaps, gmaps, WMTS, geoRSS, location, geo, geocoding, geolocation, travel, mapnick, osmarender, cloudmade, mapquest, geotag, geocaching, gpx, OpenLayers, mapping, bikemap, coordinates, geocode, geocoding, geotagging, latitude, longitude, position, route, tracks, google maps, google earth, gmaps, ar, augmented-reality, wikitude, wms, web map service, geocache, geocaching, qr, qr code, fullscreen, marker, layer, karte, blogmap, geocms, geographic, routes, tracks
+Tags:              map, maps, Leaflet, OpenStreetMap, geoJSON, json, jsonp, OSM, travelblog, opendata, open data, opengov, open government, ogdwien, google maps, googlemaps, gmaps, WMTS, geoRSS, location, geo, geocoding, geolocation, travel, mapnick, osmarender, cloudmade, mapquest, geotag, geocaching, gpx, OpenLayers, mapping, bikemap, coordinates, geocode, geocoding, geotagging, latitude, longitude, position, route, tracks, google maps, google earth, gmaps, ar, augmented-reality, wikitude, wms, web map service, geocache, geocaching, qr, qr code, fullscreen, marker, layer, karte, blogmap, geocms, geographic, routes, tracks, directions, navigation, routing, location plan, YOURS, yournavigation, ORS, openrouteservice
 Author URI:        http://www.harm.co.at
 Author:            Robert Harm (with special support from Sindre Wimberger)
 Donate link:       http://www.mapsmarker.com/donations
 Requires at least: 3.0 
 Tested up to:      3.4-alpha-19704
-Stable tag:        1.3
+Stable tag:        1.4
 
 Pin, organize & show your favorite places through OpenStreetMap/WMTS, Google Maps/Earth (KML), GeoJSON, GeoRSS or Augmented-Reality browsers
 
@@ -38,6 +38,7 @@ to the visitors of your website.
 
 = Additional features =
 
+* show directions for your locations using Google Maps, yournavigation.org or openrouteservice.org
 * configure up to 10 WMS servers to display additional information from external geodata providers (like the European Environment Agency) on your maps
 * export your markers as KML file for displaying in Google Earth or Google Maps
 * export your markers as GeoJSON file for embedding in external websites or apps
@@ -184,7 +185,7 @@ Initial release - see http://www.mapsmarker.com/v1.0 for more details
 
 == Changelog ==
 
-= v1.4 - xx.01.2012 =
+= v1.4 - 23.01.2012 =
 * [Blog post with more details about this release](http://www.mapsmarker.com/v1.4)
 * NEW: added support for routing service from Google Maps
 * NEW: added support for routing service from yournavigation.org
@@ -192,6 +193,10 @@ Initial release - see http://www.mapsmarker.com/v1.0 for more details
 * NEW: mass-actions for changing default values for existing markers (map size, icon, panel status, zoom, basemap...)
 * CHANGED: panel status can now also be selected as column for marker/layer listing page
 * CHANGED: controlbox status column for markers/layers list view now displays text instead of 0/1/2
+* BUGFIX: method for adding markers/layers as some users reported that new markers/layers were not saved to database
+* BUGFIX: method for plugin active-check as some users reported that API links did not work
+* BUGFIX: marker/layer name in fullscreen panel did not support UTF8-characters
+* BUGFIX: text width in tinymce editor was not the same as in popup text
 * BUGFIX: several German translation text strings
 * BUGFIX: markers added directly with shortcode caused error on frontend
 
