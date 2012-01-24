@@ -4,7 +4,7 @@ Plugin Name: Leaflet Maps Marker
 Plugin URI: http://www.mapsmarker.com
 Description: Pin, organize & show your favorite places through OpenStreetMap/WMTS, Google Maps/Earth (KML), GeoJSON, GeoRSS or Augmented-Reality browsers
 Tags: map, maps, Leaflet, OpenStreetMap, geoJSON, OSM, travelblog, opendata, opengov, ogdwien, google maps, WMTS, geoRSS, location, geo, geocoding, geolocation, travel, mapnick, osmarender, cloudmade, mapquest, wms
-Version: 1.4
+Version: 1.4.1
 Author: Robert Harm (with special support from Sindre Wimberger)
 Author URI: http://www.harm.co.at
 Donate link: http://www.mapsmarker.com/donations
@@ -785,7 +785,7 @@ function leafletmapsmarker() {
 			`wms9` int(1) NOT NULL,
 			`wms10` int(1) NOT NULL,
 			PRIMARY KEY  (`id`)
-		)  ENGINE=MyISAM  DEFAULT CHARSET=utf8  ;";
+		)  ENGINE=MyISAM  DEFAULT CHARSET=utf8;";
 		$wpdb->query($sql_create_marker_table);
 		$sql_create_layer_table = "CREATE TABLE IF NOT EXISTS `".$table_name_layers."` (
 			`id` int(6) unsigned NOT NULL auto_increment,
@@ -852,6 +852,19 @@ function leafletmapsmarker() {
 		$save_defaults_for_new_options = new Leafletmapsmarker_options();
 		$save_defaults_for_new_options->save_defaults_for_new_options();
 		update_option('leafletmapsmarker_version', '1.4');
+	}
+	if (get_option('leafletmapsmarker_version') == '1.4' ) {
+		$table_name_markers = $wpdb->prefix.'leafletmapsmarker_markers';
+		$table_name_layers = $wpdb->prefix.'leafletmapsmarker_layers';
+		$update141_1 = "ALTER TABLE `" . $table_name_markers . "` CHANGE `updatedby` `updatedby` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;";
+		$wpdb->query($update141_1);
+		$update141_2 = "ALTER TABLE `" . $table_name_markers . "` CHANGE `updatedon` `updatedon` DATETIME NULL;";
+		$wpdb->query($update141_2);
+		$update141_3 = "ALTER TABLE `" . $table_name_layers . "` CHANGE `updatedby` `updatedby` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;";
+		$wpdb->query($update141_3);
+		$update141_4 = "ALTER TABLE `" . $table_name_layers . "` CHANGE `updatedon` `updatedon` DATETIME NULL;";
+		$wpdb->query($update141_4);
+		update_option('leafletmapsmarker_version', '1.4.1');
 		//info: redirect to settings page only on first plugin activation, otherwise redirect is also done on bulk plugin activations
 		if (get_option('leafletmapsmarker_redirect') == 'true') 
 		{
@@ -860,7 +873,7 @@ function leafletmapsmarker() {
 		}
 	}
 	/* template for plugin updates 
-	if (get_option('leafletmapsmarker_version') == '1.4' ) {
+	if (get_option('leafletmapsmarker_version') == '1.4.1' ) {
 		//mandatory if new options in class-leaflet-options.php were added
 		$save_defaults_for_new_options = new Leafletmapsmarker_options();
 		$save_defaults_for_new_options->save_defaults_for_new_options();
