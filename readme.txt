@@ -8,7 +8,7 @@ Author:            Robert Harm (with special support from Sindre Wimberger)
 Donate link:       http://www.mapsmarker.com/donations
 Requires at least: 3.0 
 Tested up to:      3.4-alpha-19719
-Stable tag:        1.4
+Stable tag:        1.4.1
 
 Pin, organize & show your favorite places through OpenStreetMap/WMTS, Google Maps/Earth (KML), GeoJSON, GeoRSS or Augmented-Reality browsers
 
@@ -162,6 +162,9 @@ This program is free software; you can redistribute it and/or modify it under th
 For more information on translations of the plugin and how to contribute a new translation, please visit [http://www.mapsmarker.com/languages](http://www.mapsmarker.com/languages).
 
 == Upgrade Notice ==
+= v1.4.1 =
+important bugfix for installations where markers and layers could not be saved to database
+
 = v1.4 =
 added support for routing providers and more mass-actions for markers - see http://www.mapsmarker.com/v1.4 for more details
 
@@ -184,6 +187,9 @@ Added new features and bugfixes - see http://www.mapsmarker.com/v1.1 for more de
 Initial release - see http://www.mapsmarker.com/v1.0 for more details
 
 == Changelog ==
+= v1.4.1 - 24.01.2012 =
+* BUGFIX: markers & layers could not be added on some hosting providers (changed updatedby & updatedon column on both tables to NULL instead of NOT NULL)
+* CHANGED: added updated Japanes translation (thanks to Shu Higashi, @higa4)
 
 = v1.4 - 23.01.2012 =
 * [Blog post with more details about this release](http://www.mapsmarker.com/v1.4)
