@@ -226,6 +226,11 @@ a.leaflet-active {
 	}
 .leaflet-control-layers label {
 	display: block;
+	font-weight:normal;
+	font-size:1em;
+	color:#000000;
+	margin:0px;
+	padding:0px;
 	}
 .leaflet-control-layers-separator {
 	height: 0;
