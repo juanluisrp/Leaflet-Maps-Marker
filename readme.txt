@@ -190,6 +190,9 @@ Added new features and bugfixes - see http://www.mapsmarker.com/v1.1 for more de
 Initial release - see http://www.mapsmarker.com/v1.0 for more details
 
 == Changelog ==
+= v1.5 - xx.02.2012 =
+* BUGFIX: missing KML schema declaration causing KML file not to work with scribblemaps.com
+
 = v1.4.2 - 25.01.2012 =
 * [Blog post with more details about this release](http://www.mapsmarker.com/v1.4.2)
 * BUGFIX: custom marker icons not showing up on maps on certain hosts (using directory separators different to / ) 
