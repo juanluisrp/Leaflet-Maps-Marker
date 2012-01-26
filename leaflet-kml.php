@@ -45,7 +45,7 @@ if (isset($_GET['layer'])) {
   header('Content-type: application/vnd.google-earth.kml+xml; charset=utf-8'); 
   header('Content-Disposition: attachment; filename="' .   preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), get_bloginfo('name')) . '-layer-' . intval($_GET['layer']) . '.kml"');
   echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
-  echo '<kml xmlns="http://www.opengis.net/kml/2.2">'.PHP_EOL;
+  echo '<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">'.PHP_EOL;
   
   echo '<Document>'.PHP_EOL;
   echo '<description><![CDATA[powered by <a href="http://www.wordpress.org">WordPress</a> &amp; <a href="http://www.mapsmarker.com">MapsMarker.com</a>]]></description>'.PHP_EOL;    
@@ -136,7 +136,7 @@ elseif (isset($_GET['marker'])) {
   header('Content-type: application/vnd.google-earth.kml+xml; charset=utf-8'); 
   header('Content-Disposition: attachment; filename="' .   preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), get_bloginfo('name')) . '-marker-' . intval($_GET['marker']) . '.kml"');
   echo '<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL;
-  echo '<kml xmlns="http://www.opengis.net/kml/2.2">'.PHP_EOL;
+  echo '<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">'.PHP_EOL;
   echo '<Document>'.PHP_EOL;
   echo '<description><![CDATA[powered by <a href="http://www.wordpress.org">WordPress</a> &amp; <a href="http://www.mapsmarker.com">MapsMarker.com</a>]]></description>'.PHP_EOL;    
   echo '<open>0</open>'.PHP_EOL;  
